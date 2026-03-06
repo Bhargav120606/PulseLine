@@ -1,0 +1,32 @@
+import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import connectToDatabase from '@/lib/mongodb';
+import Appointment from '@/models/Appointment';
+import { decrypt } from '@/lib/auth';
+
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
+    try {
+        const cookieStore = await cookies();
+        const token = cookieStore.get('session')?.value;
+        if (!token) return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+
+        const payload = await decrypt(token);
+        if (!payload || payload.role !== 'admin') {
+            return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
+        }
+
+        const { id } = await params;
+        const body = await req.json();
+
+        await connectToDatabase();
+
+        const updated = await Appointment.findByIdAndUpdate(id, { $set: body }, { new: true });
+        if (!updated) {
+            return NextResponse.json({ message: 'Appointment not found' }, { status: 404 });
+        }
+
+        return NextResponse.json({ message: 'Appointment updated', appointment: updated }, { status: 200 });
+    } catch (error: any) {
+        return NextResponse.json({ message: 'Error updating appointment', error: error.message }, { status: 500 });
+    }
+}
