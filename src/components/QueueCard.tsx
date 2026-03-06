@@ -32,7 +32,7 @@ export default function QueueCard({ currentToken, nextTokens, waitingPatients, e
                             title="Waiting"
                             value={waitingPatients}
                             prefix={<UserOutlined />}
-                            valueStyle={{ color: '#fa8c16' }}
+                            styles={{ content: { color: '#fa8c16' } }}
                         />
                     </Card>
                 </Col>
@@ -43,7 +43,7 @@ export default function QueueCard({ currentToken, nextTokens, waitingPatients, e
                             value={estimatedWaitTime}
                             suffix="min"
                             prefix={<ClockCircleOutlined />}
-                            valueStyle={{ color: '#722ed1' }}
+                            styles={{ content: { color: '#722ed1' } }}
                         />
                     </Card>
                 </Col>

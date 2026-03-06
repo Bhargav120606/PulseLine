@@ -38,7 +38,7 @@ export default function BookPage() {
 
                 <Row gutter={[24, 24]}>
                     <Col xs={24} md={14}>
-                        <Card variant="borderless" style={{ borderRadius: 12 }}>
+                        <Card className="glass-panel" variant="borderless" style={{ borderRadius: 12 }}>
                             <BookingForm onSuccess={(appointment) => setBookedAppointment(appointment)} />
                         </Card>
                     </Col>
@@ -59,7 +59,7 @@ export default function BookPage() {
                                 />
                             </>
                         ) : (
-                            <Card variant="borderless" style={{ borderRadius: 12, textAlign: 'center', padding: 32, background: 'linear-gradient(135deg, #e6f4ff, #f0f5ff)' }}>
+                            <Card className="glass-panel" variant="borderless" style={{ borderRadius: 12, textAlign: 'center', padding: 32, background: 'linear-gradient(135deg, rgba(230, 244, 255, 0.7), rgba(240, 245, 255, 0.7))' }}>
                                 <Title level={5} type="secondary">Your Token</Title>
                                 <Text type="secondary">Submit the form to receive your digital token</Text>
                             </Card>

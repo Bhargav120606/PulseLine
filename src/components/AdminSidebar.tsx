@@ -1,6 +1,6 @@
 "use client";
 
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, ConfigProvider } from 'antd';
 import {
     DashboardOutlined,
     TeamOutlined,
@@ -52,14 +52,28 @@ export default function AdminSidebar() {
         <Sider
             breakpoint="lg"
             collapsedWidth="80"
-            style={{ minHeight: 'calc(100vh - 80px)', background: '#80deea', borderRight: '1px solid #4dd0e1' }}
+            style={{ minHeight: 'calc(100vh - 64px)', background: '#26c6da', borderRight: '1px solid #26c6da' }}
         >
-            <Menu
-                mode="inline"
-                selectedKeys={[pathname]}
-                style={{ borderRight: 0, paddingTop: 16, background: 'transparent' }}
-                items={menuItems}
-            />
+            <ConfigProvider
+                theme={{
+                    components: {
+                        Menu: {
+                            itemSelectedBg: '#80deea',
+                            itemSelectedColor: '#111827',
+                            itemColor: '#ffffff',
+                            itemHoverColor: '#ffffff',
+                            itemHoverBg: 'rgba(255,255,255,0.1)'
+                        },
+                    },
+                }}
+            >
+                <Menu
+                    mode="inline"
+                    selectedKeys={[pathname]}
+                    style={{ borderRight: 0, paddingTop: 16, background: 'transparent' }}
+                    items={menuItems}
+                />
+            </ConfigProvider>
         </Sider>
     );
 }

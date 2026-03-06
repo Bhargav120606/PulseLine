@@ -65,9 +65,9 @@ export default function PatientDashboard() {
                 <Row gutter={[24, 24]}>
                     {/* Quick Actions */}
                     <Col xs={24} md={12}>
-                        <Card variant="borderless" style={{ borderRadius: 12, height: '100%' }}>
+                        <Card className="glass-panel" variant="borderless" style={{ borderRadius: 12, height: '100%' }}>
                             <Title level={5} style={{ marginBottom: 16 }}>Quick Actions</Title>
-                            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                            <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
                                 <Link href="/book" style={{ width: '100%' }}>
                                     <Button type="primary" icon={<CalendarOutlined />} block size="large" style={{ height: 48 }}>
                                         Book Appointment
@@ -91,7 +91,7 @@ export default function PatientDashboard() {
                                 estimatedWaitTime={latestAppointment.estimatedWaitTime}
                             />
                         ) : (
-                            <Card variant="borderless" style={{ borderRadius: 12, textAlign: 'center', padding: 32, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <Card className="glass-panel" variant="borderless" style={{ borderRadius: 12, textAlign: 'center', padding: 32, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 <div>
                                     <Title level={5} type="secondary">No Token Yet</Title>
                                     <Text type="secondary">Book an appointment to receive your digital token</Text>
@@ -103,7 +103,7 @@ export default function PatientDashboard() {
 
                 {/* Appointments List */}
                 {appointments.length > 0 && (
-                    <Card variant="borderless" style={{ borderRadius: 12, marginTop: 24 }}>
+                    <Card className="glass-panel" variant="borderless" style={{ borderRadius: 12, marginTop: 24 }}>
                         <Title level={5}>Today&apos;s Appointments</Title>
                         {appointments.map((app) => (
                             <Card key={app._id} size="small" style={{ marginBottom: 8, borderRadius: 8 }}>

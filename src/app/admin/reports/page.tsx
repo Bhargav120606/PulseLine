@@ -50,7 +50,7 @@ export default function ReportsPage() {
 
             <Row gutter={[24, 24]} style={{ marginTop: 24 }}>
                 <Col xs={24} md={14}>
-                    <Card variant="borderless" style={{ borderRadius: 12 }}>
+                    <Card className="glass-panel" variant="borderless" style={{ borderRadius: 12 }}>
                         <Title level={5}>Patient Summary</Title>
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart data={barData}>
@@ -65,7 +65,7 @@ export default function ReportsPage() {
                 </Col>
 
                 <Col xs={24} md={10}>
-                    <Card variant="borderless" style={{ borderRadius: 12 }}>
+                    <Card className="glass-panel" variant="borderless" style={{ borderRadius: 12 }}>
                         <Title level={5}>Status Breakdown</Title>
                         {pieData.length > 0 ? (
                             <ResponsiveContainer width="100%" height={300}>

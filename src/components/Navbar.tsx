@@ -43,13 +43,18 @@ export default function Navbar() {
     return (
         <Header
             style={{
-                background: '#80deea',
-                borderBottom: '1px solid #f0f0f0',
+                background: 'rgba(255, 255, 255, 0.85)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                border: '1px solid rgba(255, 255, 255, 0.6)',
                 position: 'sticky',
-                top: 0,
+                top: 16,
                 zIndex: 100,
-                boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-                height: 80,
+                boxShadow: '0 8px 32px rgba(31, 38, 135, 0.05)',
+                height: 64,
+                margin: '16px 24px',
+                borderRadius: 16,
+                padding: '0 32px',
             }}
         >
             <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -79,6 +84,6 @@ export default function Navbar() {
                     </>
                 )}
             </Space>
-        </Header>
+        </Header >
     );
 }

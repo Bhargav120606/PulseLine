@@ -1,6 +1,6 @@
 "use client";
 
-import { Typography, Button, Row, Col, Card, Space } from 'antd';
+import { Typography, Button, Row, Col, Card, Space, Modal } from 'antd';
 import {
   CalendarOutlined,
   NumberOutlined,
@@ -12,13 +12,57 @@ import {
 } from '@ant-design/icons';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const { Title, Paragraph, Text } = Typography;
 
 export default function Home() {
+  const [user, setUser] = useState<any>(null);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    fetch('/api/user/me')
+      .then(res => res.json())
+      .then(data => {
+        if (data.authenticated) {
+          setUser(data.user);
+          setShowLogoutModal(true);
+        }
+      })
+      .catch(() => { });
+  }, []);
+
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    setShowLogoutModal(false);
+    setUser(null);
+    window.location.reload();
+  };
+
   return (
     <>
       <Navbar />
+
+      <Modal
+        title="Active Session Detected"
+        open={showLogoutModal}
+        closable={false}
+        mask={{ closable: false }}
+        centered
+        footer={[
+          <Button key="dashboard" onClick={() => router.push(user?.role === 'admin' ? '/admin' : '/dashboard')}>
+            Return to Dashboard
+          </Button>,
+          <Button key="logout" type="primary" danger onClick={handleLogout}>
+            Log Out
+          </Button>
+        ]}
+      >
+        <p>You are currently logged in as <strong>{user?.name}</strong>.</p>
+        <p>Would you like to log out to view the home page, or return to your dashboard?</p>
+      </Modal>
 
       {/* Hero Section */}
       <section className="hero-section">

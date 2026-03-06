@@ -35,7 +35,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Navbar />
             <Layout>
                 <AdminSidebar />
-                <Content className="dashboard-container" style={{ minHeight: 'calc(100vh - 64px)' }}>
+                <Content className="dashboard-container" style={{ minHeight: 'calc(100vh - 64px)', background: '#f8feff' }}>
                     {children}
                 </Content>
             </Layout>
