@@ -3,7 +3,7 @@ import './globals.css';
 import AntdProvider from '@/components/AntdProvider';
 
 export const metadata: Metadata = {
-  title: 'Pulseline – Digital Queue Management for Clinics',
+  title: 'PulseLine – Digital Queue Management for Clinics',
   description: 'Manage patient appointments and reduce waiting time with a smart digital queue system.',
 };
 

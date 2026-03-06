@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from 'react';
-import { Typography, Table, Button, Space, Tag, message, Spin } from 'antd';
+import { Typography, Table, Button, Space, Tag, App, Spin } from 'antd';
 import { PlayCircleOutlined, ForwardOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import DashboardStats from '@/components/DashboardStats';
 
@@ -10,6 +10,7 @@ const { Title } = Typography;
 export default function AdminDashboard() {
     const [queueData, setQueueData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const { message } = App.useApp();
 
     const fetchData = useCallback(async () => {
         try {

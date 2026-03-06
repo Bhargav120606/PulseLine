@@ -1,6 +1,6 @@
 "use client";
 
-import { Form, Input, Button, Card, Typography, message, Divider } from 'antd';
+import { Form, Input, Button, Card, Typography, App, Divider } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -12,6 +12,7 @@ const { Title, Text } = Typography;
 export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const { message } = App.useApp();
 
     const handleLogin = async (values: any) => {
         setLoading(true);
@@ -42,10 +43,10 @@ export default function LoginPage() {
         <>
             <Navbar />
             <div className="auth-container">
-                <Card className="auth-card" bordered={false} style={{ borderRadius: 16, boxShadow: '0 8px 24px rgba(0,0,0,0.08)' }}>
+                <Card className="auth-card" variant="borderless" style={{ borderRadius: 16, boxShadow: '0 8px 24px rgba(0,0,0,0.08)' }}>
                     <div style={{ textAlign: 'center', marginBottom: 24 }}>
                         <Title level={3} style={{ margin: 0 }}>Welcome Back</Title>
-                        <Text type="secondary">Sign in to your Pulseline account</Text>
+                        <Text type="secondary">Sign in to your PulseLine account</Text>
                     </div>
 
                     <Form layout="vertical" onFinish={handleLogin} size="large">

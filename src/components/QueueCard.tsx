@@ -27,7 +27,7 @@ export default function QueueCard({ currentToken, nextTokens, waitingPatients, e
 
             <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
                 <Col xs={12}>
-                    <Card bordered={false} style={{ borderRadius: 12 }}>
+                    <Card variant="borderless" style={{ borderRadius: 12 }}>
                         <Statistic
                             title="Waiting"
                             value={waitingPatients}
@@ -37,7 +37,7 @@ export default function QueueCard({ currentToken, nextTokens, waitingPatients, e
                     </Card>
                 </Col>
                 <Col xs={12}>
-                    <Card bordered={false} style={{ borderRadius: 12 }}>
+                    <Card variant="borderless" style={{ borderRadius: 12 }}>
                         <Statistic
                             title="Est. Wait"
                             value={estimatedWaitTime}
@@ -50,13 +50,13 @@ export default function QueueCard({ currentToken, nextTokens, waitingPatients, e
             </Row>
 
             {/* Progress */}
-            <Card bordered={false} style={{ borderRadius: 12, marginBottom: 24 }}>
+            <Card variant="borderless" style={{ borderRadius: 12, marginBottom: 24 }}>
                 <Title level={5}>Queue Progress</Title>
-                <Progress percent={progressPercent} status="active" strokeColor="#1677ff" />
+                <Progress percent={progressPercent} status="active" strokeColor="#00bcd4" />
             </Card>
 
             {/* Next In Queue */}
-            <Card bordered={false} style={{ borderRadius: 12 }}>
+            <Card variant="borderless" style={{ borderRadius: 12 }}>
                 <Title level={5}>Next In Line</Title>
                 {nextTokens.length === 0 ? (
                     <Text type="secondary">No patients waiting</Text>

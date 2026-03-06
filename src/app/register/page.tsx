@@ -1,6 +1,6 @@
 "use client";
 
-import { Form, Input, Button, Card, Typography, message, Divider } from 'antd';
+import { Form, Input, Button, Card, Typography, App, Divider } from 'antd';
 import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -12,6 +12,7 @@ const { Title, Text } = Typography;
 export default function RegisterPage() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const { message } = App.useApp();
 
     const handleRegister = async (values: any) => {
         setLoading(true);
@@ -54,10 +55,10 @@ export default function RegisterPage() {
         <>
             <Navbar />
             <div className="auth-container">
-                <Card className="auth-card" bordered={false} style={{ borderRadius: 16, boxShadow: '0 8px 24px rgba(0,0,0,0.08)' }}>
+                <Card className="auth-card" variant="borderless" style={{ borderRadius: 16, boxShadow: '0 8px 24px rgba(0,0,0,0.08)' }}>
                     <div style={{ textAlign: 'center', marginBottom: 24 }}>
                         <Title level={3} style={{ margin: 0 }}>Create Account</Title>
-                        <Text type="secondary">Join Pulseline to manage your clinic visits</Text>
+                        <Text type="secondary">Join PulseLine to manage your clinic visits</Text>
                     </div>
 
                     <Form layout="vertical" onFinish={handleRegister} size="large">
@@ -71,6 +72,24 @@ export default function RegisterPage() {
 
                         <Form.Item name="password" rules={[{ required: true, min: 6, message: 'Password must be at least 6 characters' }]}>
                             <Input.Password prefix={<LockOutlined />} placeholder="Password" />
+                        </Form.Item>
+
+                        <Form.Item
+                            name="confirmPassword"
+                            dependencies={['password']}
+                            rules={[
+                                { required: true, message: 'Please confirm your password' },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (!value || getFieldValue('password') === value) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject(new Error('The passwords do not match!'));
+                                    },
+                                }),
+                            ]}
+                        >
+                            <Input.Password prefix={<LockOutlined />} placeholder="Confirm Password" />
                         </Form.Item>
 
                         <Form.Item>

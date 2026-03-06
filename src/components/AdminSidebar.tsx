@@ -52,12 +52,12 @@ export default function AdminSidebar() {
         <Sider
             breakpoint="lg"
             collapsedWidth="80"
-            style={{ minHeight: 'calc(100vh - 64px)', background: '#fff', borderRight: '1px solid #f0f0f0' }}
+            style={{ minHeight: 'calc(100vh - 80px)', background: '#80deea', borderRight: '1px solid #4dd0e1' }}
         >
             <Menu
                 mode="inline"
                 selectedKeys={[pathname]}
-                style={{ borderRight: 0, paddingTop: 16 }}
+                style={{ borderRight: 0, paddingTop: 16, background: 'transparent' }}
                 items={menuItems}
             />
         </Sider>

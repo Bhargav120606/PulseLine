@@ -1,7 +1,7 @@
 "use client";
 
 import { Layout, Button, Space, Typography, Dropdown } from 'antd';
-import { UserOutlined, LogoutOutlined, DashboardOutlined, MenuOutlined, MedicineBoxOutlined } from '@ant-design/icons';
+import { UserOutlined, LogoutOutlined, DashboardOutlined, MenuOutlined, HeartOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -43,18 +43,19 @@ export default function Navbar() {
     return (
         <Header
             style={{
-                background: '#fff',
+                background: '#80deea',
                 borderBottom: '1px solid #f0f0f0',
                 position: 'sticky',
                 top: 0,
                 zIndex: 100,
                 boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                height: 80,
             }}
         >
             <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
-                <MedicineBoxOutlined style={{ fontSize: 32, color: '#2563eb' }} />
+                <HeartOutlined style={{ fontSize: 32, color: '#10b981' }} />
                 <Text strong style={{ fontSize: 24, color: '#111827', margin: 0, fontWeight: 700 }}>
-                    Pulseline
+                    PulseLine
                 </Text>
             </Link>
 
@@ -71,7 +72,7 @@ export default function Navbar() {
                             </Button>
                         </Link>
                         <Link href="/register" style={{ textDecoration: 'none' }}>
-                            <Button type="primary" style={{ background: '#2563eb', borderRadius: 6, fontWeight: 500, fontSize: 14, padding: '0 16px', height: 36, borderColor: '#2563eb' }}>
+                            <Button type="primary" style={{ background: '#00bcd4', borderRadius: 6, fontWeight: 500, fontSize: 14, padding: '0 16px', height: 36, borderColor: '#00bcd4' }}>
                                 Get Started
                             </Button>
                         </Link>

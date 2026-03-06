@@ -1,19 +1,21 @@
 "use client";
 
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, App } from 'antd';
 
 export default function AntdProvider({ children }: { children: React.ReactNode }) {
     return (
         <ConfigProvider
             theme={{
                 token: {
-                    colorPrimary: '#1677ff',
+                    colorPrimary: '#00bcd4',
                     borderRadius: 8,
                     fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
                 },
             }}
         >
-            {children}
+            <App>
+                {children}
+            </App>
         </ConfigProvider>
     );
 }

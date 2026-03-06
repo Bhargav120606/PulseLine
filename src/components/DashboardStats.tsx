@@ -14,17 +14,17 @@ export default function DashboardStats({ totalToday, waiting, completed, average
     return (
         <Row gutter={[16, 16]}>
             <Col xs={12} sm={6}>
-                <Card bordered={false} style={{ borderRadius: 12 }}>
+                <Card variant="borderless" style={{ borderRadius: 12 }}>
                     <Statistic
                         title="Total Today"
                         value={totalToday}
-                        prefix={<TeamOutlined style={{ color: '#1677ff' }} />}
-                        valueStyle={{ color: '#1677ff' }}
+                        prefix={<TeamOutlined style={{ color: '#00bcd4' }} />}
+                        valueStyle={{ color: '#00bcd4' }}
                     />
                 </Card>
             </Col>
             <Col xs={12} sm={6}>
-                <Card bordered={false} style={{ borderRadius: 12 }}>
+                <Card variant="borderless" style={{ borderRadius: 12 }}>
                     <Statistic
                         title="Waiting"
                         value={waiting}
@@ -34,7 +34,7 @@ export default function DashboardStats({ totalToday, waiting, completed, average
                 </Card>
             </Col>
             <Col xs={12} sm={6}>
-                <Card bordered={false} style={{ borderRadius: 12 }}>
+                <Card variant="borderless" style={{ borderRadius: 12 }}>
                     <Statistic
                         title="Completed"
                         value={completed}
@@ -45,7 +45,7 @@ export default function DashboardStats({ totalToday, waiting, completed, average
             </Col>
             {averageWaitTime !== undefined && (
                 <Col xs={12} sm={6}>
-                    <Card bordered={false} style={{ borderRadius: 12 }}>
+                    <Card variant="borderless" style={{ borderRadius: 12 }}>
                         <Statistic
                             title="Avg Wait"
                             value={averageWaitTime}

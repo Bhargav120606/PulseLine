@@ -13,8 +13,8 @@ interface TokenDisplayProps {
 
 export default function TokenDisplay({ tokenNumber, doctorName, estimatedWaitTime }: TokenDisplayProps) {
     return (
-        <Card className="token-display" bordered={false}>
-            <NumberOutlined style={{ fontSize: 32, color: '#1677ff', marginBottom: 8 }} />
+        <Card className="token-display" variant="borderless">
+            <NumberOutlined style={{ fontSize: 32, color: '#00bcd4', marginBottom: 8 }} />
             <Title level={5} style={{ margin: '8px 0', color: '#666' }}>Your Digital Token</Title>
             <div className="token-number">#{tokenNumber}</div>
             {doctorName && (

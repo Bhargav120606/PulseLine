@@ -24,7 +24,7 @@ export default function Home() {
       <section className="hero-section">
         <div style={{ maxWidth: 800, padding: '0 24px' }}>
           <h1 style={{ color: '#fff', fontSize: '2.8rem', fontWeight: 700, marginBottom: 16 }}>
-            Pulseline – Digital Queue Management for Clinics
+            PulseLine – Digital Queue Management for Clinics
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1.2rem', maxWidth: 600, margin: '0 auto 32px' }}>
             Manage patient appointments and reduce waiting time with a smart digital queue system.
@@ -52,24 +52,24 @@ export default function Home() {
             <Paragraph type="secondary" style={{ fontSize: 16 }}>Everything your clinic needs in one place</Paragraph>
           </div>
 
-          <Title level={4} style={{ textAlign: 'center', marginBottom: 24, color: '#1677ff' }}>For Patients</Title>
+          <Title level={4} style={{ textAlign: 'center', marginBottom: 24, color: '#00bcd4' }}>For Patients</Title>
           <Row gutter={[24, 24]} style={{ marginBottom: 48 }}>
             <Col xs={24} sm={8}>
-              <Card className="feature-card" bordered={false}>
+              <Card className="feature-card" variant="borderless">
                 <CalendarOutlined className="feature-icon" />
                 <Title level={5}>Book Appointment</Title>
                 <Text type="secondary">Schedule appointments online with your preferred doctor</Text>
               </Card>
             </Col>
             <Col xs={24} sm={8}>
-              <Card className="feature-card" bordered={false}>
+              <Card className="feature-card" variant="borderless">
                 <NumberOutlined className="feature-icon" />
                 <Title level={5}>Get Digital Token</Title>
                 <Text type="secondary">Receive a digital token instantly after booking</Text>
               </Card>
             </Col>
             <Col xs={24} sm={8}>
-              <Card className="feature-card" bordered={false}>
+              <Card className="feature-card" variant="borderless">
                 <LineChartOutlined className="feature-icon" />
                 <Title level={5}>Track Live Queue</Title>
                 <Text type="secondary">Monitor your position in the queue in real time</Text>
@@ -77,25 +77,25 @@ export default function Home() {
             </Col>
           </Row>
 
-          <Title level={4} style={{ textAlign: 'center', marginBottom: 24, color: '#0958d9' }}>For Clinic Admin</Title>
+          <Title level={4} style={{ textAlign: 'center', marginBottom: 24, color: '#4dd0e1' }}>For Clinic Admin</Title>
           <Row gutter={[24, 24]}>
             <Col xs={24} sm={8}>
-              <Card className="feature-card" bordered={false}>
-                <TeamOutlined className="feature-icon" style={{ color: '#0958d9' }} />
+              <Card className="feature-card" variant="borderless">
+                <TeamOutlined className="feature-icon" style={{ color: '#4dd0e1' }} />
                 <Title level={5}>Manage Schedules</Title>
                 <Text type="secondary">Add doctors and set their working hours</Text>
               </Card>
             </Col>
             <Col xs={24} sm={8}>
-              <Card className="feature-card" bordered={false}>
-                <SettingOutlined className="feature-icon" style={{ color: '#0958d9' }} />
+              <Card className="feature-card" variant="borderless">
+                <SettingOutlined className="feature-icon" style={{ color: '#4dd0e1' }} />
                 <Title level={5}>Update Queue</Title>
                 <Text type="secondary">Manually manage the queue with skip and complete actions</Text>
               </Card>
             </Col>
             <Col xs={24} sm={8}>
-              <Card className="feature-card" bordered={false}>
-                <BarChartOutlined className="feature-icon" style={{ color: '#0958d9' }} />
+              <Card className="feature-card" variant="borderless">
+                <BarChartOutlined className="feature-icon" style={{ color: '#4dd0e1' }} />
                 <Title level={5}>View Reports</Title>
                 <Text type="secondary">Track daily analytics and clinic performance</Text>
               </Card>
@@ -116,7 +116,7 @@ export default function Home() {
               { step: 4, text: 'Admin manages schedule and queue' },
             ].map((item) => (
               <Col xs={24} sm={12} key={item.step}>
-                <Card className="step-card" bordered={false}>
+                <Card className="step-card" variant="borderless">
                   <div className="step-number">{item.step}</div>
                   <Paragraph style={{ fontSize: 16, margin: 0 }}>{item.text}</Paragraph>
                 </Card>
@@ -127,10 +127,10 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: 'linear-gradient(135deg, #1677ff, #0958d9)', padding: '80px 24px', textAlign: 'center' }}>
+      <section style={{ background: 'linear-gradient(135deg, #00bcd4, #4dd0e1)', padding: '80px 24px', textAlign: 'center' }}>
         <Title level={2} style={{ color: '#fff', marginBottom: 12 }}>Ready to modernize your clinic?</Title>
         <Paragraph style={{ color: 'rgba(255,255,255,0.85)', fontSize: 18, marginBottom: 32 }}>
-          Join hundreds of clinics using Pulseline
+          Join hundreds of clinics using PulseLine
         </Paragraph>
         <Link href="/register">
           <Button size="large" style={{ height: 48, fontSize: 16, padding: '0 40px', background: '#52c41a', borderColor: '#52c41a', color: '#fff' }}>
@@ -141,7 +141,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer style={{ padding: '24px', textAlign: 'center', background: '#001529', color: 'rgba(255,255,255,0.5)' }}>
-        <Text style={{ color: 'rgba(255,255,255,0.5)' }}>© 2026 Pulseline. All rights reserved.</Text>
+        <Text style={{ color: 'rgba(255,255,255,0.5)' }}>© 2026 PulseLine. All rights reserved.</Text>
       </footer>
     </>
   );

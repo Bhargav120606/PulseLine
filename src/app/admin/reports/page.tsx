@@ -7,7 +7,7 @@ import DashboardStats from '@/components/DashboardStats';
 
 const { Title } = Typography;
 
-const COLORS = ['#1677ff', '#52c41a', '#fa8c16', '#ff4d4f'];
+const COLORS = ['#00bcd4', '#52c41a', '#fa8c16', '#ff4d4f'];
 
 export default function ReportsPage() {
     const [reportData, setReportData] = useState<any>(null);
@@ -50,7 +50,7 @@ export default function ReportsPage() {
 
             <Row gutter={[24, 24]} style={{ marginTop: 24 }}>
                 <Col xs={24} md={14}>
-                    <Card bordered={false} style={{ borderRadius: 12 }}>
+                    <Card variant="borderless" style={{ borderRadius: 12 }}>
                         <Title level={5}>Patient Summary</Title>
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart data={barData}>
@@ -58,14 +58,14 @@ export default function ReportsPage() {
                                 <XAxis dataKey="name" />
                                 <YAxis allowDecimals={false} />
                                 <Tooltip />
-                                <Bar dataKey="value" fill="#1677ff" radius={[4, 4, 0, 0]} />
+                                <Bar dataKey="value" fill="#00bcd4" radius={[4, 4, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </Card>
                 </Col>
 
                 <Col xs={24} md={10}>
-                    <Card bordered={false} style={{ borderRadius: 12 }}>
+                    <Card variant="borderless" style={{ borderRadius: 12 }}>
                         <Title level={5}>Status Breakdown</Title>
                         {pieData.length > 0 ? (
                             <ResponsiveContainer width="100%" height={300}>

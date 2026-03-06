@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { Typography, Table, Button, Form, Input, TimePicker, Switch, Modal, Space, Tag, message } from 'antd';
+import { Typography, Table, Button, Form, Input, TimePicker, Switch, Modal, Space, Tag, App } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
@@ -12,6 +12,7 @@ export default function DoctorsPage() {
     const [modalOpen, setModalOpen] = useState(false);
     const [editingDoctor, setEditingDoctor] = useState<any>(null);
     const [form] = Form.useForm();
+    const { message } = App.useApp();
 
     const fetchDoctors = async () => {
         try {

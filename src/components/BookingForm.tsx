@@ -1,6 +1,6 @@
 "use client";
 
-import { Form, Input, Select, Button, InputNumber, message } from 'antd';
+import { Form, Input, Select, Button, InputNumber, App } from 'antd';
 import { useEffect, useState } from 'react';
 
 interface BookingFormProps {
@@ -11,6 +11,7 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
     const [form] = Form.useForm();
     const [doctors, setDoctors] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
+    const { message } = App.useApp();
 
     useEffect(() => {
         fetch('/api/doctors')
