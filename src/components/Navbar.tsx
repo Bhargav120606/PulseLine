@@ -72,12 +72,12 @@ export default function Navbar() {
                 ) : (
                     <>
                         <Link href="/login" style={{ textDecoration: 'none' }}>
-                            <Button type="text" style={{ color: '#4b5563', fontWeight: 500, fontSize: 14 }}>
+                            <Button type="text" className="pop-up-btn navbar-signin-btn" style={{ color: '#4b5563', fontWeight: 500, fontSize: 14 }}>
                                 Sign In
                             </Button>
                         </Link>
                         <Link href="/register" style={{ textDecoration: 'none' }}>
-                            <Button type="primary" style={{ background: '#00bcd4', borderRadius: 6, fontWeight: 500, fontSize: 14, padding: '0 16px', height: 36, borderColor: '#00bcd4' }}>
+                            <Button type="primary" className="pop-up-btn get-started-btn" style={{ borderRadius: 6, fontWeight: 500, fontSize: 14, padding: '0 16px', height: 36 }}>
                                 Get Started
                             </Button>
                         </Link>

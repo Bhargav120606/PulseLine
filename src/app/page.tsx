@@ -75,12 +75,12 @@ export default function Home() {
           </p>
           <Space size="large">
             <Link href="/register">
-              <Button type="primary" size="large" style={{ height: 48, fontSize: 16, padding: '0 32px', background: '#52c41a', borderColor: '#52c41a' }}>
+              <Button type="primary" size="large" className="pop-up-btn" style={{ height: 48, fontSize: 16, padding: '0 32px', background: '#FF7043', borderColor: '#FF7043' }}>
                 Start Free Trial
               </Button>
             </Link>
             <Link href="/login">
-              <Button ghost size="large" style={{ height: 48, fontSize: 16, padding: '0 32px' }}>
+              <Button ghost size="large" className="hero-signin-btn pop-up-btn" style={{ height: 48, fontSize: 16, padding: '0 32px' }}>
                 Sign In
               </Button>
             </Link>
@@ -91,12 +91,12 @@ export default function Home() {
       {/* Features Section */}
       <section className="section" style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <Title level={2}>Features for Everyone</Title>
-            <Paragraph type="secondary" style={{ fontSize: 16 }}>Everything your clinic needs in one place</Paragraph>
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
+            <Title level={2} style={{ fontSize: '2.5rem', marginBottom: 16 }}>Features for Everyone</Title>
+            <Paragraph type="secondary" style={{ fontSize: 20 }}>Everything your clinic needs in one place</Paragraph>
           </div>
 
-          <Title level={4} style={{ textAlign: 'center', marginBottom: 24, color: '#00bcd4' }}>For Patients</Title>
+          <Title level={4} style={{ textAlign: 'center', marginBottom: 32, color: '#00bcd4', fontSize: '1.75rem' }}>For Patients</Title>
           <Row gutter={[24, 24]} style={{ marginBottom: 48 }}>
             <Col xs={24} sm={8}>
               <Card className="feature-card" variant="borderless">
@@ -121,7 +121,7 @@ export default function Home() {
             </Col>
           </Row>
 
-          <Title level={4} style={{ textAlign: 'center', marginBottom: 24, color: '#4dd0e1' }}>For Clinic Admin</Title>
+          <Title level={4} style={{ textAlign: 'center', marginBottom: 32, marginTop: 16, color: '#4dd0e1', fontSize: '1.75rem' }}>For Clinic Admin</Title>
           <Row gutter={[24, 24]}>
             <Col xs={24} sm={8}>
               <Card className="feature-card" variant="borderless">
@@ -177,7 +177,7 @@ export default function Home() {
           Join hundreds of clinics using PulseLine
         </Paragraph>
         <Link href="/register">
-          <Button size="large" style={{ height: 48, fontSize: 16, padding: '0 40px', background: '#52c41a', borderColor: '#52c41a', color: '#fff' }}>
+          <Button size="large" className="pop-up-btn" style={{ height: 48, fontSize: 16, padding: '0 40px', background: '#FF7043', borderColor: '#FF7043', color: '#fff' }}>
             Start Free Trial
           </Button>
         </Link>
