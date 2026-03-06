@@ -31,14 +31,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     if (!authorized) return null;
 
     return (
-        <>
+        <Layout style={{ minHeight: '100vh', background: '#001529' }}>
             <Navbar />
-            <Layout>
+            <Layout style={{ background: 'transparent' }}>
                 <AdminSidebar />
-                <Content className="dashboard-container" style={{ minHeight: 'calc(100vh - 64px)', background: '#f8feff' }}>
+                <Content className="dashboard-container" style={{ minHeight: 'calc(100vh - 80px)', background: '#f0f2f5', margin: '0 24px 24px 0', borderRadius: 16, padding: 24 }}>
                     {children}
                 </Content>
             </Layout>
-        </>
+        </Layout>
     );
 }

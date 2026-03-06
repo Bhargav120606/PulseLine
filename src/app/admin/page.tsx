@@ -100,7 +100,7 @@ export default function AdminDashboard() {
                             <Button
                                 type="primary"
                                 size="small"
-                                style={{ background: '#26c6da', borderColor: '#26c6da' }}
+                                style={{ background: '#00bcd4', borderColor: '#00bcd4' }}
                                 icon={<PlayCircleOutlined />}
                                 onClick={() => handleAction(record._id, 'in-progress')}
                             >

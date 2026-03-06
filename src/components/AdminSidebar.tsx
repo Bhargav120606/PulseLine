@@ -52,17 +52,17 @@ export default function AdminSidebar() {
         <Sider
             breakpoint="lg"
             collapsedWidth="80"
-            style={{ minHeight: 'calc(100vh - 64px)', background: '#26c6da', borderRight: '1px solid #26c6da' }}
+            style={{ minHeight: 'calc(100vh - 64px)', background: '#001529', borderRight: '1px solid #001529' }}
         >
             <ConfigProvider
                 theme={{
                     components: {
                         Menu: {
-                            itemSelectedBg: '#80deea',
-                            itemSelectedColor: '#111827',
-                            itemColor: '#ffffff',
+                            itemSelectedBg: '#00bcd4',
+                            itemSelectedColor: '#ffffff',
+                            itemColor: 'rgba(255, 255, 255, 0.65)',
                             itemHoverColor: '#ffffff',
-                            itemHoverBg: 'rgba(255,255,255,0.1)'
+                            itemHoverBg: 'rgba(255,255,255,0.08)'
                         },
                     },
                 }}

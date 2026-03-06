@@ -148,7 +148,7 @@ export default function DoctorsPage() {
                 <Title level={3}>Doctor Schedule Management</Title>
                 <Button
                     type="primary"
-                    style={{ background: '#26c6da', borderColor: '#26c6da' }}
+                    style={{ background: '#00bcd4', borderColor: '#00bcd4' }}
                     icon={<PlusOutlined />}
                     onClick={() => {
                         setEditingDoctor(null);

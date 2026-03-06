@@ -47,7 +47,7 @@ export default function BookPage() {
                         {bookedAppointment ? (
                             <>
                                 <Alert
-                                    message="Appointment Booked!"
+                                    title="Appointment Booked!"
                                     description="Your digital token has been generated."
                                     type="success"
                                     showIcon

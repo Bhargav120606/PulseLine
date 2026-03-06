@@ -9,6 +9,8 @@ import {
   SettingOutlined,
   BarChartOutlined,
   CheckCircleOutlined,
+  MailOutlined,
+  PhoneOutlined,
 } from '@ant-design/icons';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
@@ -89,7 +91,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="section" style={{ padding: '80px 24px' }}>
+      <section id="features" className="section" style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 56 }}>
             <Title level={2} style={{ fontSize: '2.5rem', marginBottom: 16 }}>Features for Everyone</Title>
@@ -125,21 +127,21 @@ export default function Home() {
           <Row gutter={[24, 24]}>
             <Col xs={24} sm={8}>
               <Card className="feature-card" variant="borderless">
-                <TeamOutlined className="feature-icon" style={{ color: '#4dd0e1' }} />
+                <TeamOutlined className="feature-icon" />
                 <Title level={5}>Manage Schedules</Title>
                 <Text type="secondary">Add doctors and set their working hours</Text>
               </Card>
             </Col>
             <Col xs={24} sm={8}>
               <Card className="feature-card" variant="borderless">
-                <SettingOutlined className="feature-icon" style={{ color: '#4dd0e1' }} />
+                <SettingOutlined className="feature-icon" />
                 <Title level={5}>Update Queue</Title>
                 <Text type="secondary">Manually manage the queue with skip and complete actions</Text>
               </Card>
             </Col>
             <Col xs={24} sm={8}>
               <Card className="feature-card" variant="borderless">
-                <BarChartOutlined className="feature-icon" style={{ color: '#4dd0e1' }} />
+                <BarChartOutlined className="feature-icon" />
                 <Title level={5}>View Reports</Title>
                 <Text type="secondary">Track daily analytics and clinic performance</Text>
               </Card>
@@ -149,21 +151,27 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="section section-alt" style={{ padding: '80px 24px' }}>
-        <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
-          <Title level={2} style={{ marginBottom: 48 }}>How It Works</Title>
-          <Row gutter={[24, 24]}>
+      <section className="section section-alt" style={{ padding: '80px 24px', background: 'linear-gradient(180deg, #fff 0%, #f0fbff 100%)' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <Title level={2} style={{ fontSize: '2.5rem', marginBottom: 16 }}>Seamless Workflow</Title>
+            <Paragraph type="secondary" style={{ fontSize: 20 }}>How PulseLine transforms your clinic in four simple steps</Paragraph>
+          </div>
+          <Row gutter={[32, 32]} justify="center">
             {[
-              { step: 1, text: 'Patient books an appointment online' },
-              { step: 2, text: 'System generates a digital token' },
-              { step: 3, text: 'Patient tracks live queue status' },
-              { step: 4, text: 'Admin manages schedule and queue' },
+              { step: 1, title: 'Book Online', text: 'Patients schedule their appointments instantly through the accessible portal.' },
+              { step: 2, title: 'Digital Token', text: 'A unique digital token is generated, securing their place in the clinic.' },
+              { step: 3, title: 'Track Live', text: 'Patients monitor their real-time queue status from anywhere, reducing physical waiting.' },
+              { step: 4, title: 'Consultation', text: 'The admin easily calls in patients smoothly using the dashboard interface.' },
             ].map((item) => (
-              <Col xs={24} sm={12} key={item.step}>
-                <Card className="step-card" variant="borderless">
-                  <div className="step-number">{item.step}</div>
-                  <Paragraph style={{ fontSize: 16, margin: 0 }}>{item.text}</Paragraph>
-                </Card>
+              <Col xs={24} sm={24} md={12} key={item.step}>
+                <div className="step-container" style={{ padding: '16px' }}>
+                  <Card className="step-card" variant="borderless" style={{ height: '100%', padding: '24px' }}>
+                    <div className="step-number" style={{ width: 56, height: 56, fontSize: 24, marginBottom: 16 }}>{item.step}</div>
+                    <Title level={4} style={{ marginBottom: 16, color: '#111827' }}>{item.title}</Title>
+                    <Paragraph style={{ fontSize: 16, margin: 0, color: '#4b5563', lineHeight: 1.6 }}>{item.text}</Paragraph>
+                  </Card>
+                </div>
               </Col>
             ))}
           </Row>
@@ -184,8 +192,61 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: '24px', textAlign: 'center', background: '#001529', color: 'rgba(255,255,255,0.5)' }}>
-        <Text style={{ color: 'rgba(255,255,255,0.5)' }}>© 2026 PulseLine. All rights reserved.</Text>
+      <footer className="footer-container">
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <Row gutter={[32, 32]}>
+            {/* Left Section */}
+            <Col xs={24} sm={24} md={8}>
+              <div style={{ marginBottom: 16 }}>
+                <Text style={{ fontSize: 24, fontWeight: 700, color: '#ffffff' }}>PulseLine</Text>
+              </div>
+              <Text strong style={{ display: 'block', marginBottom: 12, color: '#00bcd4' }}>Digital Queue Management for Clinics</Text>
+              <Paragraph style={{ color: '#9ca3af', fontSize: 15, lineHeight: 1.6 }}>
+                Helping clinics manage patient queues efficiently with digital token systems, real-time updates, and improved patient flow.
+              </Paragraph>
+            </Col>
+
+            {/* Middle Section (Quick Links) */}
+            <Col xs={12} sm={8} md={5}>
+              <Title level={5} style={{ color: '#ffffff', marginBottom: 20 }}>Quick Links</Title>
+              <ul className="footer-links">
+                <li><Link href="/" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Home</Link></li>
+                <li><Link href="#features">Features</Link></li>
+                <li><Link href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Pricing</Link></li>
+              </ul>
+            </Col>
+
+            {/* Right Section (For Clinics) */}
+            <Col xs={12} sm={8} md={6}>
+              <Title level={5} style={{ color: '#ffffff', marginBottom: 20 }}>For Clinics</Title>
+              <ul className="footer-links">
+                <li><Link href="/demo">Book a Demo</Link></li>
+                <li><Link href="/login">Clinic Login</Link></li>
+                <li><Link href="/queue">Patient Queue Display</Link></li>
+                <li><Link href="#" onClick={(e) => e.preventDefault()}>Help Center</Link></li>
+              </ul>
+            </Col>
+
+            {/* Contact Section */}
+            <Col xs={24} sm={8} md={5}>
+              <Title level={5} style={{ color: '#ffffff', marginBottom: 20 }}>Contact</Title>
+              <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
+                <div className="footer-contact-item">
+                  <MailOutlined style={{ color: '#00bcd4', fontSize: 18 }} />
+                  <a href="mailto:support@pulseline.com">support@pulseline.com</a>
+                </div>
+                <div className="footer-contact-item">
+                  <PhoneOutlined style={{ color: '#00bcd4', fontSize: 18 }} />
+                  <a href="tel:+91XXXXXXXXXX">+91-XXXXXXXXXX</a>
+                </div>
+              </Space>
+            </Col>
+          </Row>
+
+          <div className="footer-bottom">
+            <Text style={{ color: '#9ca3af', fontSize: 14 }}>© 2026 PulseLine. All rights reserved.</Text>
+          </div>
+        </div>
       </footer>
     </>
   );

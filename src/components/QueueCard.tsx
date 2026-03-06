@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Tag, List, Typography, Progress, Statistic, Row, Col } from 'antd';
+import { Card, Tag, Typography, Progress, Statistic, Row, Col } from 'antd';
 import { ClockCircleOutlined, UserOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
@@ -61,16 +61,16 @@ export default function QueueCard({ currentToken, nextTokens, waitingPatients, e
                 {nextTokens.length === 0 ? (
                     <Text type="secondary">No patients waiting</Text>
                 ) : (
-                    <List
-                        size="small"
-                        dataSource={nextTokens.slice(0, 10)}
-                        renderItem={(token, index) => (
-                            <List.Item>
-                                <Tag color={index === 0 ? 'blue' : 'default'}>Token #{token}</Tag>
-                                {index === 0 && <Tag color="green">Next</Tag>}
-                            </List.Item>
-                        )}
-                    />
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                        {nextTokens.slice(0, 10).map((token, index) => (
+                            <div key={token} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px', borderBottom: index < Math.min(nextTokens.length, 10) - 1 ? '1px solid #f0f0f0' : 'none' }}>
+                                <div>
+                                    <Tag color={index === 0 ? 'blue' : 'default'} style={{ margin: 0 }}>Token #{token}</Tag>
+                                </div>
+                                {index === 0 && <Tag color="green" style={{ margin: 0 }}>Next</Tag>}
+                            </div>
+                        ))}
+                    </div>
                 )}
             </Card>
         </div>
