@@ -1,12 +1,11 @@
 "use client";
 
-import { Layout, Button, Space, Typography, Dropdown, Badge, notification } from 'antd';
-import { UserOutlined, LogoutOutlined, DashboardOutlined, HeartOutlined, BellOutlined, CalendarOutlined, LineChartOutlined } from '@ant-design/icons';
+import { Button, Space, Typography, Dropdown, Badge, notification } from 'antd';
+import { UserOutlined, LogoutOutlined, DashboardOutlined, BellOutlined, CalendarOutlined, LineChartOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const { Header } = Layout;
 const { Text } = Typography;
 
 export default function Navbar() {
@@ -31,7 +30,6 @@ export default function Navbar() {
 
         const checkQueue = async () => {
             try {
-                // Fetch user's active appointments
                 const apptsRes = await fetch('/api/appointments');
                 const apptsData = await apptsRes.json();
                 if (!apptsData.appointments) return;
@@ -42,7 +40,6 @@ export default function Navbar() {
 
                 if (myActiveTokens.length === 0) return;
 
-                // Fetch live queue status
                 const queueRes = await fetch('/api/queue');
                 const queueData = await queueRes.json();
 
@@ -72,7 +69,7 @@ export default function Navbar() {
             } catch (err) { }
         };
 
-        const interval = setInterval(checkQueue, 10000); // Check every 10 seconds
+        const interval = setInterval(checkQueue, 10000);
         return () => clearInterval(interval);
     }, [user, notifiedTokens]);
 
@@ -113,131 +110,165 @@ export default function Navbar() {
             ...notifications.map(n => ({
                 key: n.id,
                 label: (
-                    <div style={{ padding: '4px 0', width: 250, whiteSpace: 'normal', opacity: n.read ? 0.6 : 1 }}>
+                    <div style={{ padding: '4px 0', width: 250, whiteSpace: 'normal' as const, opacity: n.read ? 0.6 : 1 }}>
                         <Text strong={!n.read} style={{ display: 'block', marginBottom: 4 }}>{n.message}</Text>
                         <Text type="secondary" style={{ fontSize: 12 }}>{n.time}</Text>
                     </div>
                 )
             })),
             { type: 'divider' as const },
-            { key: 'mark-read', label: 'Mark all as read', onClick: markAllRead, style: { textAlign: 'center' as const, color: '#00bcd4' } }
+            { key: 'mark-read', label: 'Mark all as read', onClick: markAllRead, style: { textAlign: 'center' as const, color: '#26c6da' } }
         ]
         : [{ key: 'empty', label: <Text type="secondary">No notifications yet</Text> }];
 
     const isAdminPage = pathname?.startsWith('/admin');
 
     return (
-        <Header
+        <header
             style={{
-                background: isAdminPage ? 'rgba(0, 21, 41, 0.85)' : 'rgba(255, 255, 255, 0.85)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                border: isAdminPage ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.6)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                whiteSpace: 'nowrap',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.4)',
+                padding: '0 24px',
+                background: 'rgba(255, 255, 255, 0.6)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
                 position: 'sticky',
-                top: 16,
+                top: 0,
                 zIndex: 1000,
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
                 height: 64,
-                margin: '16px 24px',
-                borderRadius: 16,
-                padding: '0 32px',
             }}
         >
-            <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
-                <HeartOutlined style={{ fontSize: 32, color: '#10b981' }} />
-                <Text strong style={{ fontSize: 24, color: isAdminPage ? '#ffffff' : '#111827', margin: 0, fontWeight: 700 }}>
+            <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: 8,
+                    background: '#26c6da',
+                    padding: 6,
+                    color: '#ffffff'
+                }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: 20 }}>pulse_alert</span>
+                </div>
+                <span style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em' }}>
                     PulseLine
-                </Text>
+                </span>
             </Link>
 
-            <Space size="large" align="center">
+            <div style={{ display: 'flex', flex: 1, justifyContent: 'flex-end', gap: 32, alignItems: 'center' }}>
+                {/* Nav Links for app pages */}
                 {isAppPage && user && user.role !== 'admin' && (
-                    <Space size="middle" style={{ marginRight: 16 }}>
-                        <Link href="/dashboard">
-                            <Button
-                                type={pathname === '/dashboard' ? 'primary' : 'text'}
-                                ghost={pathname === '/dashboard'}
-                                icon={<DashboardOutlined />}
-                                className="pop-up-btn"
-                                style={{
-                                    color: pathname === '/dashboard' ? '#00bcd4' : '#4b5563',
-                                    borderColor: pathname === '/dashboard' ? '#00bcd4' : 'transparent',
-                                    fontWeight: 500
-                                }}
-                            >
-                                Dashboard
-                            </Button>
+                    <nav style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
+                        <Link href="/dashboard" style={{
+                            fontSize: 14,
+                            fontWeight: pathname === '/dashboard' ? 600 : 500,
+                            color: pathname === '/dashboard' ? '#26c6da' : '#64748b',
+                            textDecoration: 'none',
+                            transition: 'color 0.2s',
+                        }}>
+                            Dashboard
                         </Link>
-                        <Link href="/book">
-                            <Button
-                                type={pathname === '/book' ? 'primary' : 'text'}
-                                ghost={pathname === '/book'}
-                                icon={<CalendarOutlined />}
-                                className="pop-up-btn"
-                                style={{
-                                    color: pathname === '/book' ? '#00bcd4' : '#4b5563',
-                                    borderColor: pathname === '/book' ? '#00bcd4' : 'transparent',
-                                    fontWeight: 500
-                                }}
-                            >
-                                Book Appointment
-                            </Button>
+                        <Link href="/book" style={{
+                            fontSize: 14,
+                            fontWeight: pathname === '/book' ? 600 : 500,
+                            color: pathname === '/book' ? '#26c6da' : '#64748b',
+                            textDecoration: 'none',
+                            transition: 'color 0.2s',
+                        }}>
+                            Book Appointment
                         </Link>
-                        <Link href="/queue">
-                            <Button
-                                type={pathname === '/queue' ? 'primary' : 'text'}
-                                ghost={pathname === '/queue'}
-                                icon={<LineChartOutlined />}
-                                className="pop-up-btn"
-                                style={{
-                                    color: pathname === '/queue' ? '#00bcd4' : '#4b5563',
-                                    borderColor: pathname === '/queue' ? '#00bcd4' : 'transparent',
-                                    fontWeight: 500
-                                }}
-                            >
-                                Live Queue
-                            </Button>
+                        <Link href="/queue" style={{
+                            fontSize: 14,
+                            fontWeight: pathname === '/queue' ? 600 : 500,
+                            color: pathname === '/queue' ? '#26c6da' : '#64748b',
+                            textDecoration: 'none',
+                            transition: 'color 0.2s',
+                        }}>
+                            Live Queue
                         </Link>
-                    </Space>
+                    </nav>
+                )}
+
+                {/* Non-app page nav links */}
+                {!isAppPage && !isAdminPage && !user && (
+                    <nav style={{ display: 'flex', alignItems: 'center', gap: 36 }}>
+                        <Link href="/" style={{ fontSize: 14, fontWeight: 600, color: '#0f172a', textDecoration: 'none' }}>Home</Link>
+                        <Link href="#features" style={{ fontSize: 14, fontWeight: 600, color: '#0f172a', textDecoration: 'none' }}>Features</Link>
+                        <Link href="#" style={{ fontSize: 14, fontWeight: 600, color: '#0f172a', textDecoration: 'none' }}>About</Link>
+                    </nav>
                 )}
 
                 {user ? (
                     <Space size="middle" align="center">
                         {user.role !== 'admin' && (
                             <Dropdown menu={{ items: notificationItems }} placement="bottomRight" trigger={['click']} onOpenChange={(open) => { if (open && unreadCount > 0) markAllRead(); }}>
-                                <Badge count={unreadCount} size="small" style={{ backgroundColor: '#ff4d4f' }}>
-                                    <Button type="text" shape="circle" icon={<BellOutlined style={{ fontSize: 18, color: '#4b5563' }} />} />
+                                <Badge count={unreadCount} size="small" style={{ backgroundColor: '#ef4444' }}>
+                                    <button style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        width: 40,
+                                        height: 40,
+                                        borderRadius: 8,
+                                        background: '#f1f5f9',
+                                        border: 'none',
+                                        cursor: 'pointer',
+                                        color: '#475569',
+                                        transition: 'background 0.2s',
+                                    }}>
+                                        <span className="material-symbols-outlined" style={{ fontSize: 20 }}>notifications</span>
+                                    </button>
                                 </Badge>
                             </Dropdown>
                         )}
                         <Dropdown menu={{ items: menuItems }} placement="bottomRight">
-                            <Button
-                                icon={<UserOutlined />}
-                                style={isAdminPage ? {
-                                    background: 'rgba(255, 255, 255, 0.1)',
-                                    color: '#ffffff',
-                                    borderColor: 'rgba(255, 255, 255, 0.2)'
-                                } : {}}
-                            >
+                            <button style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 8,
+                                padding: '6px 14px',
+                                borderRadius: 8,
+                                background: '#f1f5f9',
+                                border: '1px solid #e2e8f0',
+                                cursor: 'pointer',
+                                color: '#0f172a',
+                                fontWeight: 600,
+                                fontSize: 14,
+                                fontFamily: 'inherit',
+                            }}>
+                                <span className="material-symbols-outlined" style={{ fontSize: 18 }}>person</span>
                                 {user.name}
-                            </Button>
+                            </button>
                         </Dropdown>
                     </Space>
                 ) : (
-                    <>
-                        <Link href="/login" style={{ textDecoration: 'none' }}>
-                            <Button type="text" className="pop-up-btn navbar-signin-btn" style={{ color: '#4b5563', fontWeight: 500, fontSize: 14 }}>
-                                Sign In
-                            </Button>
-                        </Link>
-                        <Link href="/register" style={{ textDecoration: 'none' }}>
-                            <Button type="primary" className="pop-up-btn get-started-btn" style={{ borderRadius: 6, fontWeight: 500, fontSize: 14, padding: '0 16px', height: 36 }}>
-                                Get Started
-                            </Button>
-                        </Link>
-                    </>
+                    <Link href="/login" style={{ textDecoration: 'none' }}>
+                        <button style={{
+                            display: 'flex',
+                            minWidth: 90,
+                            cursor: 'pointer',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: 8,
+                            height: 40,
+                            padding: '0 20px',
+                            background: '#26c6da',
+                            color: '#ffffff',
+                            fontSize: 14,
+                            fontWeight: 700,
+                            border: 'none',
+                            fontFamily: 'inherit',
+                            transition: 'all 0.2s',
+                            boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                        }}>
+                            Login
+                        </button>
+                    </Link>
                 )}
-            </Space>
-        </Header >
+            </div>
+        </header>
     );
 }

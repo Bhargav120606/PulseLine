@@ -2,13 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Layout, Typography, Row, Col, Card, Spin, Alert } from 'antd';
+import { Spin, Alert } from 'antd';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import BookingForm from '@/components/BookingForm';
 import TokenDisplay from '@/components/TokenDisplay';
-
-const { Content } = Layout;
-const { Title, Text } = Typography;
 
 export default function BookPage() {
     const [user, setUser] = useState<any>(null);
@@ -32,18 +30,28 @@ export default function BookPage() {
     return (
         <>
             <Navbar />
-            <Content className="dashboard-container" style={{ maxWidth: 900, margin: '0 auto' }}>
-                <Title level={3} style={{ marginBottom: 8 }}>Book Appointment</Title>
-                <Text type="secondary" style={{ marginBottom: 24, display: 'block' }}>Fill in the details to book your appointment</Text>
+            <main style={{ maxWidth: 900, margin: '0 auto', padding: 32 }}>
+                <div style={{ marginBottom: 24 }}>
+                    <h1 style={{ fontSize: 28, fontWeight: 900, color: '#0f172a', margin: '0 0 4px', letterSpacing: '-0.02em' }}>Book Appointment</h1>
+                    <p style={{ color: '#64748b', fontSize: 15, margin: 0, fontWeight: 500 }}>Fill in the details to book your appointment</p>
+                </div>
 
-                <Row gutter={[24, 24]}>
-                    <Col xs={24} md={14}>
-                        <Card className="glass-panel" variant="borderless" style={{ borderRadius: 12 }}>
-                            <BookingForm onSuccess={(appointment) => setBookedAppointment(appointment)} />
-                        </Card>
-                    </Col>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
+                    {/* Booking Form */}
+                    <div style={{
+                        background: 'rgba(255, 255, 255, 0.6)',
+                        backdropFilter: 'blur(16px)',
+                        WebkitBackdropFilter: 'blur(16px)',
+                        borderRadius: 12,
+                        border: '1px solid rgba(255, 255, 255, 0.4)',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+                        padding: 24,
+                    }}>
+                        <BookingForm onSuccess={(appointment) => setBookedAppointment(appointment)} />
+                    </div>
 
-                    <Col xs={24} md={10}>
+                    {/* Token Display / Placeholder */}
+                    <div>
                         {bookedAppointment ? (
                             <>
                                 <Alert
@@ -59,14 +67,30 @@ export default function BookPage() {
                                 />
                             </>
                         ) : (
-                            <Card className="glass-panel" variant="borderless" style={{ borderRadius: 12, textAlign: 'center', padding: 32, background: 'linear-gradient(135deg, rgba(230, 244, 255, 0.7), rgba(240, 245, 255, 0.7))' }}>
-                                <Title level={5} type="secondary">Your Token</Title>
-                                <Text type="secondary">Submit the form to receive your digital token</Text>
-                            </Card>
+                            <div style={{
+                                background: 'rgba(255, 255, 255, 0.6)',
+                                backdropFilter: 'blur(16px)',
+                                WebkitBackdropFilter: 'blur(16px)',
+                                borderRadius: 12,
+                                border: '1px solid rgba(255, 255, 255, 0.4)',
+                                boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+                                textAlign: 'center',
+                                padding: 48,
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}>
+                                <span className="material-symbols-outlined" style={{ fontSize: 56, color: '#cbd5e1', marginBottom: 16 }}>confirmation_number</span>
+                                <h4 style={{ color: '#94a3b8', fontWeight: 600, fontSize: 16, margin: '0 0 4px' }}>Your Token</h4>
+                                <p style={{ color: '#94a3b8', fontSize: 14, margin: 0 }}>Submit the form to receive your digital token</p>
+                            </div>
                         )}
-                    </Col>
-                </Row>
-            </Content>
+                    </div>
+                </div>
+            </main>
+            <Footer />
         </>
     );
 }

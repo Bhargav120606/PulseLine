@@ -1,23 +1,12 @@
 "use client";
 
-import { Typography, Button, Row, Col, Card, Space, Modal } from 'antd';
-import {
-  CalendarOutlined,
-  NumberOutlined,
-  LineChartOutlined,
-  TeamOutlined,
-  SettingOutlined,
-  BarChartOutlined,
-  CheckCircleOutlined,
-  MailOutlined,
-  PhoneOutlined,
-} from '@ant-design/icons';
+import { Modal, Button } from 'antd';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-
-const { Title, Paragraph, Text } = Typography;
+import Image from 'next/image';
 
 export default function Home() {
   const [user, setUser] = useState<any>(null);
@@ -66,188 +55,262 @@ export default function Home() {
         <p>Would you like to log out to view the home page, or return to your dashboard?</p>
       </Modal>
 
-      {/* Hero Section */}
-      <section className="hero-section">
-        <div style={{ maxWidth: 800, padding: '0 24px' }}>
-          <h1 style={{ color: '#fff', fontSize: '2.8rem', fontWeight: 700, marginBottom: 16 }}>
-            PulseLine – Digital Queue Management for Clinics
-          </h1>
-          <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1.2rem', maxWidth: 600, margin: '0 auto 32px' }}>
-            Manage patient appointments and reduce waiting time with a smart digital queue system.
-          </p>
-          <Space size="large">
-            <Link href="/register">
-              <Button type="primary" size="large" className="pop-up-btn" style={{ height: 48, fontSize: 16, padding: '0 32px', background: '#FF7043', borderColor: '#FF7043' }}>
-                Start Free Trial
-              </Button>
-            </Link>
-            <Link href="/login">
-              <Button ghost size="large" className="hero-signin-btn pop-up-btn" style={{ height: 48, fontSize: 16, padding: '0 32px' }}>
-                Sign In
-              </Button>
-            </Link>
-          </Space>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="section" style={{ padding: '80px 24px' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 56 }}>
-            <Title level={2} style={{ fontSize: '2.5rem', marginBottom: 16 }}>Features for Everyone</Title>
-            <Paragraph type="secondary" style={{ fontSize: 20 }}>Everything your clinic needs in one place</Paragraph>
-          </div>
-
-          <Title level={4} style={{ textAlign: 'center', marginBottom: 32, color: '#00bcd4', fontSize: '1.75rem' }}>For Patients</Title>
-          <Row gutter={[24, 24]} style={{ marginBottom: 48 }}>
-            <Col xs={24} sm={8}>
-              <Card className="feature-card" variant="borderless">
-                <CalendarOutlined className="feature-icon" />
-                <Title level={5}>Book Appointment</Title>
-                <Text type="secondary">Schedule appointments online with your preferred doctor</Text>
-              </Card>
-            </Col>
-            <Col xs={24} sm={8}>
-              <Card className="feature-card" variant="borderless">
-                <NumberOutlined className="feature-icon" />
-                <Title level={5}>Get Digital Token</Title>
-                <Text type="secondary">Receive a digital token instantly after booking</Text>
-              </Card>
-            </Col>
-            <Col xs={24} sm={8}>
-              <Card className="feature-card" variant="borderless">
-                <LineChartOutlined className="feature-icon" />
-                <Title level={5}>Track Live Queue</Title>
-                <Text type="secondary">Monitor your position in the queue in real time</Text>
-              </Card>
-            </Col>
-          </Row>
-
-          <Title level={4} style={{ textAlign: 'center', marginBottom: 32, marginTop: 16, color: '#4dd0e1', fontSize: '1.75rem' }}>For Clinic Admin</Title>
-          <Row gutter={[24, 24]}>
-            <Col xs={24} sm={8}>
-              <Card className="feature-card" variant="borderless">
-                <TeamOutlined className="feature-icon" />
-                <Title level={5}>Manage Schedules</Title>
-                <Text type="secondary">Add doctors and set their working hours</Text>
-              </Card>
-            </Col>
-            <Col xs={24} sm={8}>
-              <Card className="feature-card" variant="borderless">
-                <SettingOutlined className="feature-icon" />
-                <Title level={5}>Update Queue</Title>
-                <Text type="secondary">Manually manage the queue with skip and complete actions</Text>
-              </Card>
-            </Col>
-            <Col xs={24} sm={8}>
-              <Card className="feature-card" variant="borderless">
-                <BarChartOutlined className="feature-icon" />
-                <Title level={5}>View Reports</Title>
-                <Text type="secondary">Track daily analytics and clinic performance</Text>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="section section-alt" style={{ padding: '80px 24px', background: 'linear-gradient(180deg, #fff 0%, #f0fbff 100%)' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <Title level={2} style={{ fontSize: '2.5rem', marginBottom: 16 }}>Seamless Workflow</Title>
-            <Paragraph type="secondary" style={{ fontSize: 20 }}>How PulseLine transforms your clinic in four simple steps</Paragraph>
-          </div>
-          <Row gutter={[32, 32]} justify="center">
-            {[
-              { step: 1, title: 'Book Online', text: 'Patients schedule their appointments instantly through the accessible portal.' },
-              { step: 2, title: 'Digital Token', text: 'A unique digital token is generated, securing their place in the clinic.' },
-              { step: 3, title: 'Track Live', text: 'Patients monitor their real-time queue status from anywhere, reducing physical waiting.' },
-              { step: 4, title: 'Consultation', text: 'The admin easily calls in patients smoothly using the dashboard interface.' },
-            ].map((item) => (
-              <Col xs={24} sm={24} md={12} key={item.step}>
-                <div className="step-container" style={{ padding: '16px' }}>
-                  <Card className="step-card" variant="borderless" style={{ height: '100%', padding: '24px' }}>
-                    <div className="step-number" style={{ width: 56, height: 56, fontSize: 24, marginBottom: 16 }}>{item.step}</div>
-                    <Title level={4} style={{ marginBottom: 16, color: '#111827' }}>{item.title}</Title>
-                    <Paragraph style={{ fontSize: 16, margin: 0, color: '#4b5563', lineHeight: 1.6 }}>{item.text}</Paragraph>
-                  </Card>
+      <main style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+        {/* Hero Section */}
+        <div style={{ maxWidth: 1280, margin: '0 auto', width: '100%', padding: '0 24px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 40, padding: '48px 0 96px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 40, alignItems: 'center' }}>
+              {/* Left content */}
+              <div style={{ flex: '1 1 480px', display: 'flex', flexDirection: 'column', gap: 32 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                  <span style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    alignSelf: 'flex-start',
+                    borderRadius: 999,
+                    background: 'rgba(38, 198, 218, 0.1)',
+                    padding: '8px 16px',
+                    color: '#26c6da',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                  }}>
+                    Healthcare Redefined
+                  </span>
+                  <h1 style={{
+                    fontSize: 'clamp(2.5rem, 5vw, 3.75rem)',
+                    fontWeight: 900,
+                    lineHeight: 1.1,
+                    letterSpacing: '-0.02em',
+                    color: '#0f172a',
+                    margin: 0,
+                  }}>
+                    Modern Healthcare Solutions with <span style={{ color: '#26c6da' }}>PulseLine</span>
+                  </h1>
+                  <p style={{
+                    fontSize: 18,
+                    fontWeight: 500,
+                    lineHeight: 1.7,
+                    color: '#475569',
+                    maxWidth: 540,
+                    margin: 0,
+                  }}>
+                    Experience seamless clinic management with live tracking, instant tokens, and effortless booking. We put patients first.
+                  </p>
                 </div>
-              </Col>
-            ))}
-          </Row>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+                  <Link href="/register">
+                    <button style={{
+                      display: 'flex',
+                      minWidth: 140,
+                      cursor: 'pointer',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: 12,
+                      height: 56,
+                      padding: '0 32px',
+                      background: '#26c6da',
+                      color: '#ffffff',
+                      fontSize: 16,
+                      fontWeight: 700,
+                      border: 'none',
+                      fontFamily: 'inherit',
+                      boxShadow: '0 8px 24px rgba(38, 198, 218, 0.2)',
+                      transition: 'transform 0.2s',
+                      textDecoration: 'none',
+                    }}>
+                      Get Started
+                    </button>
+                  </Link>
+                  <Link href="/login">
+                    <button style={{
+                      display: 'flex',
+                      minWidth: 140,
+                      cursor: 'pointer',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: 12,
+                      height: 56,
+                      padding: '0 32px',
+                      background: '#ffffff',
+                      color: '#0f172a',
+                      fontSize: 16,
+                      fontWeight: 700,
+                      border: '1px solid #e2e8f0',
+                      fontFamily: 'inherit',
+                      transition: 'background 0.2s',
+                      gap: 8,
+                    }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: 20 }}>play_circle</span>
+                      Watch Demo
+                    </button>
+                  </Link>
+                </div>
+              </div>
+              {/* Right image */}
+              <div style={{ flex: '1 1 400px' }}>
+                <div style={{
+                  position: 'relative',
+                  borderRadius: 16,
+                  overflow: 'hidden',
+                  boxShadow: '0 25px 50px rgba(0, 0, 0, 0.12)',
+                  aspectRatio: '4/3',
+                  background: 'linear-gradient(135deg, #26c6da 0%, #4DD0E1 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  <Image
+                    src="/reception2.jpg"
+                    alt="PulseLine Reception"
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
 
-      {/* CTA */}
-      <section style={{ background: 'linear-gradient(135deg, #00bcd4, #4dd0e1)', padding: '80px 24px', textAlign: 'center' }}>
-        <Title level={2} style={{ color: '#fff', marginBottom: 12 }}>Ready to modernize your clinic?</Title>
-        <Paragraph style={{ color: 'rgba(255,255,255,0.85)', fontSize: 18, marginBottom: 32 }}>
-          Join hundreds of clinics using PulseLine
-        </Paragraph>
-        <Link href="/register">
-          <Button size="large" className="pop-up-btn" style={{ height: 48, fontSize: 16, padding: '0 40px', background: '#FF7043', borderColor: '#FF7043', color: '#fff' }}>
-            Start Free Trial
-          </Button>
-        </Link>
-      </section>
+        {/* Features Grid */}
+        <section id="features" style={{
+          background: '#ffffff',
+          padding: '80px 0',
+          borderTop: '1px solid #f1f5f9',
+          borderBottom: '1px solid #f1f5f9',
+        }}>
+          <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px' }}>
+            <div style={{ marginBottom: 64 }}>
+              <h2 style={{
+                fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
+                fontWeight: 700,
+                lineHeight: 1.2,
+                color: '#0f172a',
+                margin: '0 0 16px',
+              }}>
+                Why Choose PulseLine?
+              </h2>
+              <p style={{
+                fontSize: 18,
+                color: '#64748b',
+                maxWidth: 720,
+                margin: 0,
+              }}>
+                Our platform is designed to streamline your healthcare experience using cutting-edge technology and patient-centric design.
+              </p>
+            </div>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: 32,
+            }}>
+              {[
+                { icon: 'monitoring', title: 'Live Tracking', desc: 'Monitor your queue status in real-time from anywhere. No more waiting in crowded rooms for hours.' },
+                { icon: 'calendar_month', title: 'Easy Booking', desc: 'Schedule appointments with your preferred doctors in just a few clicks with our intuitive interface.' },
+                { icon: 'confirmation_number', title: 'Instant Tokens', desc: 'Get your digital consultation token immediately upon booking. Secure, paperless, and convenient.' },
+              ].map((feature) => (
+                <div
+                  key={feature.title}
+                  className="feature-card"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 24,
+                    padding: 32,
+                    borderRadius: 16,
+                    border: '1px solid #e2e8f0',
+                    background: '#f6f6f8',
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  <div className="feature-icon-box">
+                    <span className="material-symbols-outlined" style={{ fontSize: 28 }}>{feature.icon}</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    <h3 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: '#0f172a' }}>{feature.title}</h3>
+                    <p style={{ fontSize: 15, color: '#64748b', lineHeight: 1.6, margin: 0 }}>{feature.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section style={{ padding: '80px 0' }}>
+          <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px' }}>
+            <div style={{
+              position: 'relative',
+              overflow: 'hidden',
+              borderRadius: 24,
+              background: 'rgba(38, 198, 218, 0.7)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              padding: '64px 40px',
+              textAlign: 'center',
+              boxShadow: '0 25px 50px rgba(38, 198, 218, 0.25)',
+            }}>
+              {/* Dot pattern overlay */}
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                opacity: 0.1,
+                backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+                backgroundSize: '32px 32px',
+              }} />
+              <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                  <h2 style={{
+                    fontSize: 'clamp(1.8rem, 4vw, 3.75rem)',
+                    fontWeight: 900,
+                    letterSpacing: '-0.02em',
+                    color: '#ffffff',
+                    margin: 0,
+                    lineHeight: 1.1,
+                  }}>
+                    Ready to transform your clinic experience?
+                  </h2>
+                  <p style={{
+                    margin: '0 auto',
+                    maxWidth: 640,
+                    fontSize: 18,
+                    color: '#cbd5e1',
+                    opacity: 0.9,
+                  }}>
+                    Join thousands of users and hundreds of clinics who trust PulseLine for their daily healthcare needs.
+                  </p>
+                </div>
+                <Link href="/register">
+                  <button style={{
+                    display: 'flex',
+                    minWidth: 200,
+                    cursor: 'pointer',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: 12,
+                    height: 56,
+                    padding: '0 32px',
+                    background: '#ffffff',
+                    color: '#26c6da',
+                    fontSize: 18,
+                    fontWeight: 700,
+                    border: 'none',
+                    fontFamily: 'inherit',
+                    transition: 'transform 0.2s',
+                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
+                  }}>
+                    Get Started Now
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
 
       {/* Footer */}
-      <footer className="footer-container">
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <Row gutter={[32, 32]}>
-            {/* Left Section */}
-            <Col xs={24} sm={24} md={8}>
-              <div style={{ marginBottom: 16 }}>
-                <Text style={{ fontSize: 24, fontWeight: 700, color: '#ffffff' }}>PulseLine</Text>
-              </div>
-              <Text strong style={{ display: 'block', marginBottom: 12, color: '#00bcd4' }}>Digital Queue Management for Clinics</Text>
-              <Paragraph style={{ color: '#9ca3af', fontSize: 15, lineHeight: 1.6 }}>
-                Helping clinics manage patient queues efficiently with digital token systems, real-time updates, and improved patient flow.
-              </Paragraph>
-            </Col>
-
-            {/* Middle Section (Quick Links) */}
-            <Col xs={12} sm={8} md={5}>
-              <Title level={5} style={{ color: '#ffffff', marginBottom: 20 }}>Quick Links</Title>
-              <ul className="footer-links">
-                <li><Link href="/" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Home</Link></li>
-                <li><Link href="#features">Features</Link></li>
-                <li><Link href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Pricing</Link></li>
-              </ul>
-            </Col>
-
-            {/* Right Section (For Clinics) */}
-            <Col xs={12} sm={8} md={6}>
-              <Title level={5} style={{ color: '#ffffff', marginBottom: 20 }}>For Clinics</Title>
-              <ul className="footer-links">
-                <li><Link href="/demo">Book a Demo</Link></li>
-                <li><Link href="/login">Clinic Login</Link></li>
-                <li><Link href="/queue">Patient Queue Display</Link></li>
-                <li><Link href="#" onClick={(e) => e.preventDefault()}>Help Center</Link></li>
-              </ul>
-            </Col>
-
-            {/* Contact Section */}
-            <Col xs={24} sm={8} md={5}>
-              <Title level={5} style={{ color: '#ffffff', marginBottom: 20 }}>Contact</Title>
-              <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
-                <div className="footer-contact-item">
-                  <MailOutlined style={{ color: '#00bcd4', fontSize: 18 }} />
-                  <a href="mailto:support@pulseline.com">support@pulseline.com</a>
-                </div>
-                <div className="footer-contact-item">
-                  <PhoneOutlined style={{ color: '#00bcd4', fontSize: 18 }} />
-                  <a href="tel:+91XXXXXXXXXX">+91-XXXXXXXXXX</a>
-                </div>
-              </Space>
-            </Col>
-          </Row>
-
-          <div className="footer-bottom">
-            <Text style={{ color: '#9ca3af', fontSize: 14 }}>© 2026 PulseLine. All rights reserved.</Text>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

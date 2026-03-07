@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Layout, Typography, Spin } from 'antd';
+import { Spin } from 'antd';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import QueueCard from '@/components/QueueCard';
-
-const { Content } = Layout;
-const { Title, Text } = Typography;
 
 export default function QueuePage() {
     const [queueData, setQueueData] = useState<any>(null);
@@ -33,7 +31,7 @@ export default function QueuePage() {
 
     useEffect(() => {
         fetchQueue();
-        const interval = setInterval(fetchQueue, 10000); // Refresh every 10 seconds
+        const interval = setInterval(fetchQueue, 10000);
         return () => clearInterval(interval);
     }, []);
 
@@ -42,9 +40,22 @@ export default function QueuePage() {
     return (
         <>
             <Navbar />
-            <Content className="dashboard-container" style={{ maxWidth: 700, margin: '0 auto' }}>
-                <Title level={3} style={{ marginBottom: 8 }}>Live Queue Status</Title>
-                <Text type="secondary" style={{ marginBottom: 24, display: 'block' }}>Auto-refreshes every 10 seconds</Text>
+            <main style={{ flex: 1, padding: 32, maxWidth: 1400, margin: '0 auto', width: '100%' }}>
+                {/* Header */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 32 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                        <div style={{ color: '#26c6da' }}>
+                            <span className="material-symbols-outlined" style={{ fontSize: 32 }}>medical_services</span>
+                        </div>
+                        <div>
+                            <h1 style={{ fontSize: 24, fontWeight: 800, color: '#26c6da', textTransform: 'uppercase', letterSpacing: '-0.02em', margin: 0 }}>PulseLine Clinic</h1>
+                            <p style={{ color: '#94a3b8', fontSize: 14, fontWeight: 500, margin: 0 }}>Live Queue Dashboard</p>
+                        </div>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(38, 198, 218, 0.1)', padding: 12, borderRadius: 8 }}>
+                        <span className="material-symbols-outlined" style={{ color: '#26c6da', fontSize: 24 }}>schedule</span>
+                    </div>
+                </div>
 
                 {queueData ? (
                     <QueueCard
@@ -54,9 +65,10 @@ export default function QueuePage() {
                         estimatedWaitTime={queueData.estimatedWaitTime}
                     />
                 ) : (
-                    <Text type="secondary">Unable to load queue data</Text>
+                    <p style={{ color: '#94a3b8' }}>Unable to load queue data</p>
                 )}
-            </Content>
+            </main>
+            <Footer />
         </>
     );
 }

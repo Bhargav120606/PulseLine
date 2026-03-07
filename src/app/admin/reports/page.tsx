@@ -7,7 +7,7 @@ import DashboardStats from '@/components/DashboardStats';
 
 const { Title } = Typography;
 
-const COLORS = ['#00bcd4', '#52c41a', '#fa8c16', '#ff4d4f'];
+const COLORS = ['#26c6da', '#22c55e', '#f59e0b', '#ef4444'];
 
 export default function ReportsPage() {
     const [reportData, setReportData] = useState<any>(null);
@@ -58,7 +58,7 @@ export default function ReportsPage() {
                                 <XAxis dataKey="name" />
                                 <YAxis allowDecimals={false} />
                                 <Tooltip />
-                                <Bar dataKey="value" fill="#00bcd4" radius={[4, 4, 0, 0]} />
+                                <Bar dataKey="value" fill="#26c6da" radius={[4, 4, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </Card>

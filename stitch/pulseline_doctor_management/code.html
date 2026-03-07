@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PulseLine | Doctor Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1f346b",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#13161f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        /* Custom scrollbar for better UI */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
+        /* Modal Overlay Simulation */
+        .modal-overlay { background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(2px); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 lg:px-10 py-3 sticky top-0 z-40">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">medical_services</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">PulseLine</h2>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium" href="#">Dashboard</a>
+<a class="text-primary border-b-2 border-primary pb-1 text-sm font-bold" href="#">Doctors</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Patients</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Schedules</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-1.5 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-slate-500 text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm placeholder:text-slate-500 w-48" placeholder="Search resources..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg size-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center overflow-hidden">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="Professional male avatar profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7SrQ_y_dITjmPitWEYO7ln26PNAHl7N1baKi-16GGrbnjxsx3mxfD4eC7YDz-ekZjrGKu_S8x1u3O8ffKQisUoUV3a35UmzC7VR4Ex6BpDBddIdxjWpzeRTTJGzMbpQULXs1zRoexsQoGp5be5k2bgaW4ZfoHd7z2HatbvYb1c7wWxvS6Hlneix5hBTOtmCGalEGluA5XRO70ser24bZLJ0CM3d2u-aQWOmJ_Tz6gCXU76BMCUdcOF7m04ju3gn3Q-Vsz745LCh1b"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full p-6 lg:p-10">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+<div class="flex flex-col gap-1">
+<h1 class="text-slate-900 dark:text-white text-3xl font-extrabold tracking-tight">Doctor Management</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Organize clinical staff, monitor availability and update specialties.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                Add New Doctor
+            </button>
+</div>
+<!-- Filter Tabs -->
+<div class="mb-6 border-b border-slate-200 dark:border-slate-800">
+<div class="flex gap-8">
+<button class="pb-3 border-b-2 border-primary text-primary font-bold text-sm">All Doctors (24)</button>
+<button class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 font-medium text-sm transition-colors">Active</button>
+<button class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 font-medium text-sm transition-colors">On Leave</button>
+</div>
+</div>
+<!-- Data Table Card -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Doctor Name</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Specialty</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Experience</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-center">Availability</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="Dr Sarah" data-alt="Female doctor profile photo avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3SRYVyXpsDz4afUOo9iol5i0sjFncHz65428oCvhYi2l-0sn5Ii0oDLKO28uFBuO8w9ijCBln8Re_zB56FYizRX5Xi94rpsxvj-qZ8M_oIRjllxQGpWUbxaTpdxmznshYF_MVgbs2UW_gHlZRyeAwBKtelvEJHl5ndrzR4u7xi9Gmcbx_HuAPErmncryFWLhXtgkaoiBq4ffzKsOhnDjdrr31vcIXqbPuf7ywzuZJxBrEPFjQthVxHPYlgtSuR5nRnBpDBM5B5yTU"/>
+</div>
+<div>
+<div class="font-semibold text-slate-900 dark:text-white">Dr. Sarah Jenkins</div>
+<div class="text-xs text-slate-500 uppercase font-medium">ID: #DOC-1029</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Cardiology</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">12 Years</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 text-sm font-medium">
+<span class="size-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                                    Active
+                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="Dr Mark" data-alt="Male doctor profile photo avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR2ziq6g08Dvp7kYm0ON1c8sQb78-Lk_dwNqRFavE0IF0r4V5MKlRJs02gaR5FZi9r9uVVNw_F1NPkvITGu1laQw-SNlDy96cw3CtBqpc2ZHW_D2BR6SFqpMaNKiHovEeK9iP49PFD6f6oLwn5Rp7rAbp02cWzTI88JOLh3FwkGw859pFF9Lh4NDebrfd22kO8O3Og230b04-CdBujfS8XDDgspu26-4k9RFd5n9mIkHpM0fwVPS2GbAyoJjewLT0XZAc91yoTDSCL"/>
+</div>
+<div>
+<div class="font-semibold text-slate-900 dark:text-white">Dr. Mark Thompson</div>
+<div class="text-xs text-slate-500 uppercase font-medium">ID: #DOC-1031</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Neurology</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">8 Years</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-slate-400 text-sm font-medium">
+<span class="size-2 bg-slate-400 rounded-full"></span>
+                                    Inactive
+                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="Dr Elena" data-alt="Latina doctor profile photo avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8zhpChGTft0u7Muc7QKvbq4HGTOFay00AMbMol-EKPYJdwwea6Q147BfdczGibmX-KC5Ed-d_nzPS504l0GWnU3hI6DwVX_Dgg3XiVYOt_FwoooXLEm0i9N3yrOJCwpwOmpV7ZfaCMcf1Oe9qWjc29sUkB3T0asTAKwwcWqSfY7Pq3jFBa_WJeVD3kG083xN7zTg7xkxLCW7NQsV5-TAL6nzNxTQNXd8Asy4AOF9riGVeIT5OY1dUfm0xdm0CDu1XvZ_MmbEB19N3"/>
+</div>
+<div>
+<div class="font-semibold text-slate-900 dark:text-white">Dr. Elena Rodriguez</div>
+<div class="text-xs text-slate-500 uppercase font-medium">ID: #DOC-1044</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Pediatrics</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">15 Years</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 text-sm font-medium">
+<span class="size-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                                    Active
+                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/30 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<p class="text-sm text-slate-500">Showing 1 to 3 of 24 entries</p>
+<div class="flex gap-1">
+<button class="px-3 py-1 rounded border border-slate-300 dark:border-slate-700 text-slate-500 hover:bg-white transition-colors">Prev</button>
+<button class="px-3 py-1 rounded bg-primary text-white font-medium">1</button>
+<button class="px-3 py-1 rounded border border-slate-300 dark:border-slate-700 text-slate-500 hover:bg-white transition-colors">2</button>
+<button class="px-3 py-1 rounded border border-slate-300 dark:border-slate-700 text-slate-500 hover:bg-white transition-colors">3</button>
+<button class="px-3 py-1 rounded border border-slate-300 dark:border-slate-700 text-slate-500 hover:bg-white transition-colors">Next</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Add New Doctor Modal (Simulation) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+<!-- Overlay -->
+<div class="absolute inset-0 modal-overlay"></div>
+<!-- Modal Content (Ant Design Style) -->
+<div class="relative bg-white dark:bg-slate-900 w-full max-w-lg rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+<div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Add New Doctor</h3>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="p-6 space-y-5">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="col-span-2">
+<label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Full Name</label>
+<input class="w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-primary focus:ring-primary/20 transition-all" placeholder="e.g. Dr. Johnathan Smith" type="text"/>
+</div>
+<div class="col-span-2 sm:col-span-1">
+<label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Specialty</label>
+<select class="w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-primary focus:ring-primary/20 transition-all">
+<option>Cardiology</option>
+<option>Neurology</option>
+<option>Pediatrics</option>
+<option>Orthopedics</option>
+<option>Dermatology</option>
+</select>
+</div>
+<div class="col-span-2 sm:col-span-1">
+<label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Experience (Years)</label>
+<input class="w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-primary focus:ring-primary/20 transition-all" placeholder="5" type="number"/>
+</div>
+<div class="col-span-2">
+<label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Weekly Schedule</label>
+<div class="grid grid-cols-4 gap-2">
+<button class="px-2 py-2 rounded border border-primary bg-primary/5 text-primary text-xs font-bold" type="button">Mon</button>
+<button class="px-2 py-2 rounded border border-slate-200 dark:border-slate-700 text-slate-500 text-xs font-bold" type="button">Tue</button>
+<button class="px-2 py-2 rounded border border-primary bg-primary/5 text-primary text-xs font-bold" type="button">Wed</button>
+<button class="px-2 py-2 rounded border border-primary bg-primary/5 text-primary text-xs font-bold" type="button">Thu</button>
+<button class="px-2 py-2 rounded border border-primary bg-primary/5 text-primary text-xs font-bold" type="button">Fri</button>
+<button class="px-2 py-2 rounded border border-slate-200 dark:border-slate-700 text-slate-500 text-xs font-bold" type="button">Sat</button>
+<button class="px-2 py-2 rounded border border-slate-200 dark:border-slate-700 text-slate-500 text-xs font-bold" type="button">Sun</button>
+</div>
+</div>
+<div class="col-span-2">
+<label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Shift Hours</label>
+<div class="flex items-center gap-2">
+<input class="flex-1 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-primary focus:ring-primary/20" type="time" value="09:00"/>
+<span class="text-slate-400">to</span>
+<input class="flex-1 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:border-primary focus:ring-primary/20" type="time" value="17:00"/>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+<button class="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-colors" type="button">Cancel</button>
+<button class="px-6 py-2 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-lg shadow-lg shadow-primary/20 transition-all" type="submit">Create Profile</button>
+</div>
+</form>
+</div>
+</div>
+</body></html>

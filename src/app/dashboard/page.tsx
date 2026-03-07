@@ -2,14 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Layout, Typography, Row, Col, Card, Button, Space, Spin } from 'antd';
-import { CalendarOutlined, OrderedListOutlined, LogoutOutlined } from '@ant-design/icons';
-import Link from 'next/link';
+import { Spin } from 'antd';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import TokenDisplay from '@/components/TokenDisplay';
-
-const { Content } = Layout;
-const { Title, Text } = Typography;
+import Link from 'next/link';
 
 export default function PatientDashboard() {
     const [user, setUser] = useState<any>(null);
@@ -53,76 +50,181 @@ export default function PatientDashboard() {
     return (
         <>
             <Navbar />
-            <Content className="dashboard-container" style={{ maxWidth: 1000, margin: '0 auto' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+            <main style={{ maxWidth: 1000, margin: '0 auto', padding: 32 }}>
+                {/* Header */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
                     <div>
-                        <Title level={3} style={{ margin: 0 }}>Welcome, {user?.name}!</Title>
-                        <Text type="secondary">Manage your appointments and track your queue</Text>
+                        <h1 style={{ fontSize: 28, fontWeight: 900, color: '#0f172a', margin: '0 0 4px', letterSpacing: '-0.02em' }}>
+                            Welcome, {user?.name}!
+                        </h1>
+                        <p style={{ color: '#64748b', fontSize: 15, margin: 0, fontWeight: 500 }}>Manage your appointments and track your queue</p>
                     </div>
-                    <Button icon={<LogoutOutlined />} onClick={handleLogout}>Logout</Button>
+                    <button
+                        onClick={handleLogout}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 8,
+                            padding: '8px 16px',
+                            borderRadius: 8,
+                            background: '#ffffff',
+                            border: '1px solid #e2e8f0',
+                            cursor: 'pointer',
+                            color: '#64748b',
+                            fontWeight: 600,
+                            fontSize: 14,
+                            fontFamily: 'inherit',
+                            transition: 'background 0.2s',
+                        }}
+                    >
+                        <span className="material-symbols-outlined" style={{ fontSize: 18 }}>logout</span>
+                        Logout
+                    </button>
                 </div>
 
-                <Row gutter={[24, 24]}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
                     {/* Quick Actions */}
-                    <Col xs={24} md={12}>
-                        <Card className="glass-panel" variant="borderless" style={{ borderRadius: 12, height: '100%' }}>
-                            <Title level={5} style={{ marginBottom: 16 }}>Quick Actions</Title>
-                            <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
-                                <Link href="/book" style={{ width: '100%' }}>
-                                    <Button type="primary" icon={<CalendarOutlined />} block size="large" style={{ height: 48 }}>
-                                        Book Appointment
-                                    </Button>
-                                </Link>
-                                <Link href="/queue" style={{ width: '100%' }}>
-                                    <Button icon={<OrderedListOutlined />} block size="large" style={{ height: 48 }}>
-                                        View Live Queue
-                                    </Button>
-                                </Link>
-                            </Space>
-                        </Card>
-                    </Col>
+                    <div style={{
+                        background: 'rgba(255, 255, 255, 0.6)',
+                        backdropFilter: 'blur(16px)',
+                        WebkitBackdropFilter: 'blur(16px)',
+                        borderRadius: 12,
+                        border: '1px solid rgba(255, 255, 255, 0.4)',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+                        padding: 24,
+                    }}>
+                        <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 20, color: '#0f172a' }}>Quick Actions</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                            <Link href="/book" style={{ textDecoration: 'none' }}>
+                                <button style={{
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: 10,
+                                    padding: '14px 20px',
+                                    borderRadius: 8,
+                                    background: '#26c6da',
+                                    color: '#ffffff',
+                                    fontWeight: 700,
+                                    fontSize: 15,
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    fontFamily: 'inherit',
+                                }}>
+                                    <span className="material-symbols-outlined" style={{ fontSize: 20 }}>calendar_month</span>
+                                    Book Appointment
+                                </button>
+                            </Link>
+                            <Link href="/queue" style={{ textDecoration: 'none' }}>
+                                <button style={{
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: 10,
+                                    padding: '14px 20px',
+                                    borderRadius: 8,
+                                    background: '#ffffff',
+                                    color: '#0f172a',
+                                    fontWeight: 700,
+                                    fontSize: 15,
+                                    border: '1px solid #e2e8f0',
+                                    cursor: 'pointer',
+                                    fontFamily: 'inherit',
+                                }}>
+                                    <span className="material-symbols-outlined" style={{ fontSize: 20 }}>monitoring</span>
+                                    View Live Queue
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
 
                     {/* Latest Token */}
-                    <Col xs={24} md={12}>
-                        {latestAppointment ? (
-                            <TokenDisplay
-                                tokenNumber={latestAppointment.tokenNumber}
-                                doctorName={latestAppointment.doctorId?.name}
-                                estimatedWaitTime={latestAppointment.estimatedWaitTime}
-                            />
-                        ) : (
-                            <Card className="glass-panel" variant="borderless" style={{ borderRadius: 12, textAlign: 'center', padding: 32, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <div>
-                                    <Title level={5} type="secondary">No Token Yet</Title>
-                                    <Text type="secondary">Book an appointment to receive your digital token</Text>
-                                </div>
-                            </Card>
-                        )}
-                    </Col>
-                </Row>
+                    {latestAppointment ? (
+                        <TokenDisplay
+                            tokenNumber={latestAppointment.tokenNumber}
+                            doctorName={latestAppointment.doctorId?.name}
+                            estimatedWaitTime={latestAppointment.estimatedWaitTime}
+                        />
+                    ) : (
+                        <div style={{
+                            background: 'rgba(255, 255, 255, 0.6)',
+                            backdropFilter: 'blur(16px)',
+                            WebkitBackdropFilter: 'blur(16px)',
+                            borderRadius: 12,
+                            border: '1px solid rgba(255, 255, 255, 0.4)',
+                            boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+                            padding: 32,
+                            textAlign: 'center',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}>
+                            <div>
+                                <span className="material-symbols-outlined" style={{ fontSize: 48, color: '#cbd5e1', marginBottom: 12, display: 'block' }}>confirmation_number</span>
+                                <h4 style={{ color: '#94a3b8', fontWeight: 600, fontSize: 16, margin: '0 0 4px' }}>No Token Yet</h4>
+                                <p style={{ color: '#94a3b8', fontSize: 14, margin: 0 }}>Book an appointment to receive your digital token</p>
+                            </div>
+                        </div>
+                    )}
+                </div>
 
                 {/* Appointments List */}
                 {appointments.length > 0 && (
-                    <Card className="glass-panel" variant="borderless" style={{ borderRadius: 12, marginTop: 24 }}>
-                        <Title level={5}>Today&apos;s Appointments</Title>
-                        {appointments.map((app) => (
-                            <Card key={app._id} size="small" style={{ marginBottom: 8, borderRadius: 8 }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <div>
-                                        <Text strong>Token #{app.tokenNumber}</Text>
-                                        <Text type="secondary" style={{ marginLeft: 12 }}>
+                    <div style={{
+                        marginTop: 24,
+                        background: 'rgba(255, 255, 255, 0.6)',
+                        backdropFilter: 'blur(16px)',
+                        WebkitBackdropFilter: 'blur(16px)',
+                        borderRadius: 12,
+                        border: '1px solid rgba(255, 255, 255, 0.4)',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+                        padding: 24,
+                    }}>
+                        <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 16, color: '#0f172a' }}>Today&apos;s Appointments</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                            {appointments.map((app) => (
+                                <div key={app._id} style={{
+                                    padding: '12px 16px',
+                                    borderRadius: 8,
+                                    border: '1px solid #f1f5f9',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                        <span style={{
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            padding: '2px 10px',
+                                            borderRadius: 4,
+                                            background: 'rgba(38, 198, 218, 0.1)',
+                                            color: '#26c6da',
+                                            fontSize: 14,
+                                            fontWeight: 700,
+                                        }}>
+                                            #{app.tokenNumber}
+                                        </span>
+                                        <span style={{ color: '#64748b', fontSize: 14, fontWeight: 500 }}>
                                             Dr. {app.doctorId?.name || 'N/A'}
-                                        </Text>
+                                        </span>
                                     </div>
-                                    <Text type={app.status === 'completed' ? 'success' : app.status === 'in-progress' ? 'warning' : 'secondary'} strong style={{ textTransform: 'capitalize' }}>
+                                    <span style={{
+                                        fontSize: 12,
+                                        fontWeight: 700,
+                                        textTransform: 'uppercase',
+                                        color: app.status === 'completed' ? '#22c55e' : app.status === 'in-progress' ? '#f59e0b' : '#94a3b8',
+                                    }}>
                                         {app.status}
-                                    </Text>
+                                    </span>
                                 </div>
-                            </Card>
-                        ))}
-                    </Card>
+                            ))}
+                        </div>
+                    </div>
                 )}
-            </Content>
+            </main>
+            <Footer />
         </>
     );
 }

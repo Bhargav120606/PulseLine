@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Doctor Profile - PulseLine Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1f346b",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#13161f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d3d8e3;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #1f346b;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Modal Overlay -->
+<div class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+<!-- Modal Container -->
+<div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+<!-- Modal Header -->
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-white dark:bg-slate-900 sticky top-0 z-10">
+<div>
+<h2 class="text-xl font-bold text-slate-900 dark:text-slate-100">Edit Practitioner Profile</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400">Update doctor information and availability</p>
+</div>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<!-- Modal Body (Scrollable Content) -->
+<div class="flex-1 overflow-y-auto p-6 custom-scrollbar">
+<form class="space-y-6">
+<!-- Basic Information Section -->
+<div class="space-y-4">
+<div class="flex items-center gap-2 text-primary font-semibold border-b border-primary/10 pb-2">
+<span class="material-symbols-outlined text-lg">person</span>
+<span>Basic Information</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1.5">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Full Name</label>
+<input class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-primary h-11 px-4 text-sm transition-all" placeholder="Enter full name" type="text" value="Dr. Sarah Jenkins"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Specialty</label>
+<select class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-primary h-11 px-4 text-sm transition-all">
+<option value="cardiology">Cardiology</option>
+<option value="neurology">Neurology</option>
+<option value="pediatrics">Pediatrics</option>
+<option value="oncology">Oncology</option>
+<option value="dermatology">Dermatology</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1.5">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Years of Experience</label>
+<input class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-primary h-11 px-4 text-sm transition-all" type="number" value="12"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">License ID</label>
+<input class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-primary h-11 px-4 text-sm transition-all" type="text" value="MED-99201-X"/>
+</div>
+</div>
+</div>
+<!-- Availability Section -->
+<div class="space-y-4 pt-4">
+<div class="flex items-center gap-2 text-primary font-semibold border-b border-primary/10 pb-2">
+<span class="material-symbols-outlined text-lg">calendar_month</span>
+<span>Weekly Schedule</span>
+</div>
+<div class="space-y-3">
+<!-- Day Row -->
+<div class="flex flex-wrap items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 w-32">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium">Monday</span>
+</div>
+<div class="flex items-center gap-2 flex-1 justify-end">
+<input class="text-sm rounded border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-1.5 w-32 focus:ring-primary" type="time" value="09:00"/>
+<span class="text-slate-400">to</span>
+<input class="text-sm rounded border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-1.5 w-32 focus:ring-primary" type="time" value="17:00"/>
+</div>
+</div>
+<!-- Day Row -->
+<div class="flex flex-wrap items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 w-32">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium">Tuesday</span>
+</div>
+<div class="flex items-center gap-2 flex-1 justify-end">
+<input class="text-sm rounded border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-1.5 w-32 focus:ring-primary" type="time" value="09:00"/>
+<span class="text-slate-400">to</span>
+<input class="text-sm rounded border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-1.5 w-32 focus:ring-primary" type="time" value="17:00"/>
+</div>
+</div>
+<!-- Day Row -->
+<div class="flex flex-wrap items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 w-32">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium">Wednesday</span>
+</div>
+<div class="flex items-center gap-2 flex-1 justify-end">
+<input class="text-sm rounded border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-1.5 w-32 focus:ring-primary" type="time" value="10:00"/>
+<span class="text-slate-400">to</span>
+<input class="text-sm rounded border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-1.5 w-32 focus:ring-primary" type="time" value="18:00"/>
+</div>
+</div>
+<!-- Day Row -->
+<div class="flex flex-wrap items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 opacity-60">
+<div class="flex items-center gap-3 w-32">
+<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium">Sunday</span>
+</div>
+<div class="flex items-center gap-2 flex-1 justify-end">
+<span class="text-xs font-medium text-slate-400 italic">Off duty</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bio / Additional Details -->
+<div class="space-y-4 pt-4">
+<div class="flex items-center gap-2 text-primary font-semibold border-b border-primary/10 pb-2">
+<span class="material-symbols-outlined text-lg">description</span>
+<span>Professional Summary</span>
+</div>
+<div class="space-y-1.5">
+<textarea class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-primary p-4 text-sm transition-all" placeholder="Enter a brief professional summary..." rows="3">Dr. Sarah Jenkins is a board-certified cardiologist with over 12 years of experience in interventional cardiology and heart disease prevention.</textarea>
+</div>
+</div>
+</form>
+</div>
+<!-- Modal Footer -->
+<div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-end gap-3 bg-slate-50 dark:bg-slate-900/50">
+<button class="px-5 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    Cancel
+                </button>
+<button class="px-5 py-2.5 rounded-lg text-sm font-medium bg-primary text-white hover:bg-primary/90 shadow-sm transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">save</span>
+                    Save Changes
+                </button>
+</div>
+</div>
+</div>
+<!-- Background Mock Content (PulseLine Dashboard Style) -->
+<div class="p-8 max-w-7xl mx-auto blur-[2px] pointer-events-none select-none">
+<div class="flex justify-between items-center mb-10">
+<div>
+<h1 class="text-2xl font-bold">PulseLine Medical Admin</h1>
+<p class="text-slate-500">Directory Management</p>
+</div>
+<div class="flex gap-4">
+<div class="h-10 w-10 rounded-full bg-slate-200"></div>
+<div class="h-10 w-32 rounded bg-slate-200"></div>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-6 mb-8">
+<div class="h-32 bg-white rounded-xl shadow-sm"></div>
+<div class="h-32 bg-white rounded-xl shadow-sm"></div>
+<div class="h-32 bg-white rounded-xl shadow-sm"></div>
+<div class="h-32 bg-white rounded-xl shadow-sm"></div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-6">
+<div class="h-8 w-48 bg-slate-100 mb-6 rounded"></div>
+<div class="space-y-4">
+<div class="h-12 bg-slate-50 rounded"></div>
+<div class="h-12 bg-slate-50 rounded"></div>
+<div class="h-12 bg-slate-50 rounded"></div>
+<div class="h-12 bg-slate-50 rounded"></div>
+</div>
+</div>
+</div>
+</body></html>

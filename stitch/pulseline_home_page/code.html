@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PulseLine - Efficient Healthcare Queue Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1f346b",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#13161f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6 md:px-20 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-3 text-primary dark:text-slate-100">
+<div class="flex items-center justify-center size-10 bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">PulseLine</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-700 dark:text-slate-300 text-sm font-semibold hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-semibold hover:text-primary transition-colors" href="#">Features</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-semibold hover:text-primary transition-colors" href="#">About</a>
+</nav>
+<button class="flex min-w-[100px] cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-primary text-white text-sm font-bold transition-all hover:bg-primary/90 shadow-sm">
+<span>Login</span>
+</button>
+</div>
+</header>
+<main class="flex-1">
+<!-- Hero Section -->
+<div class="max-w-7xl mx-auto px-6 md:px-20 py-12 md:py-24">
+<div class="flex flex-col gap-10 lg:flex-row items-center lg:gap-16">
+<div class="flex flex-col gap-8 flex-1 text-center lg:text-left">
+<div class="flex flex-col gap-4">
+<h1 class="text-slate-900 dark:text-white text-4xl font-extrabold leading-[1.1] md:text-6xl tracking-tight">
+                                    Efficient Healthcare <br/>
+<span class="text-primary">Queue Management</span>
+</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                                    PulseLine streamlines patient flow with real-time digital queuing, reducing wait times and improving clinic efficiency for a better patient experience.
+                                </p>
+</div>
+<div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+<button class="flex min-w-[160px] cursor-pointer items-center justify-center rounded-lg h-14 px-8 bg-primary text-white text-base font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+                                    Get Started
+                                </button>
+<button class="flex min-w-[160px] cursor-pointer items-center justify-center rounded-lg h-14 px-8 border-2 border-primary/20 bg-transparent text-primary dark:text-slate-100 text-base font-bold hover:bg-primary/5 transition-colors">
+                                    Watch Demo
+                                </button>
+</div>
+</div>
+<div class="flex-1 w-full max-w-[600px]">
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-blue-400 rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-1000"></div>
+<div class="relative bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-2xl">
+<img alt="Modern hospital reception desk" class="w-full h-auto aspect-[4/3] object-cover" data-alt="Modern clean hospital waiting room and reception" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB81lQXTzSas6Cj5p5ULrrWlf_3_4rHI_o-hCBGfx_oxE9JxXgG57q5W56a0Jxh2XuvUqlV4YaO1NWi-OeVzJsojlpmGTkAf17Z--Uan0kpSHD0htWQxUhfDX0chWHqHTIgbIO1dPsOzBCSUNpuhk7uOrmsiXVwIy7IncWlK3DmR8sWgO3Hmx-H68bjHPK6ZuSIv11SIqsCxVzIumkxsLhGnN87UkdEIdH6sU3f42TimBxteyhOMa_k2RtVLFTZXkMRhAWCjQAMIMp8"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Features Section -->
+<div class="bg-white dark:bg-background-dark/50 py-20 border-y border-primary/5">
+<div class="max-w-7xl mx-auto px-6 md:px-20">
+<div class="flex flex-col gap-4 mb-16 text-center">
+<h2 class="text-slate-900 dark:text-white text-3xl md:text-4xl font-bold tracking-tight">
+                                Everything you need for seamless flow
+                            </h2>
+<p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto">
+                                Experience a seamless healthcare journey with our advanced queue management solutions designed for modern clinics.
+                            </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Live Tracking -->
+<div class="flex flex-col gap-6 rounded-2xl border border-primary/10 bg-background-light dark:bg-slate-800/50 p-8 hover:shadow-xl hover:-translate-y-1 transition-all">
+<div class="size-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">query_stats</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold">Live Tracking</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Monitor your position in the queue in real-time from anywhere via our mobile-responsive dashboard.</p>
+</div>
+</div>
+<!-- Easy Booking -->
+<div class="flex flex-col gap-6 rounded-2xl border border-primary/10 bg-background-light dark:bg-slate-800/50 p-8 hover:shadow-xl hover:-translate-y-1 transition-all">
+<div class="size-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">calendar_month</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold">Easy Booking</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Schedule appointments with your preferred doctors in just a few clicks with instant confirmation.</p>
+</div>
+</div>
+<!-- Instant Tokens -->
+<div class="flex flex-col gap-6 rounded-2xl border border-primary/10 bg-background-light dark:bg-slate-800/50 p-8 hover:shadow-xl hover:-translate-y-1 transition-all">
+<div class="size-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">confirmation_number</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold">Instant Tokens</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Receive digital tokens instantly and get automated SMS or push notifications when it's your turn.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Call to Action Section -->
+<div class="max-w-5xl mx-auto px-6 py-20 text-center">
+<div class="bg-primary rounded-[2rem] p-10 md:p-20 text-white relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
+<div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full -ml-24 -mb-24"></div>
+<div class="relative z-10 flex flex-col gap-6 items-center">
+<h2 class="text-3xl md:text-5xl font-bold tracking-tight">Ready to transform your clinic?</h2>
+<p class="text-blue-100 text-lg md:text-xl max-w-xl">
+                                Join hundreds of healthcare providers using PulseLine to modernize their patient experience.
+                            </p>
+<div class="flex flex-wrap gap-4 mt-4">
+<button class="bg-white text-primary px-10 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition-colors shadow-lg">
+                                    Contact Sales
+                                </button>
+<button class="bg-primary/20 border border-white/30 backdrop-blur-sm text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-colors">
+                                    Request a Quote
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-white dark:bg-background-dark px-6 md:px-20 py-12 border-t border-primary/5">
+<div class="max-w-7xl mx-auto flex flex-col gap-10">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+<div class="flex items-center gap-3 text-primary dark:text-slate-100">
+<div class="flex items-center justify-center size-8 bg-primary rounded text-white">
+<span class="material-symbols-outlined text-sm">analytics</span>
+</div>
+<span class="text-lg font-bold">PulseLine</span>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-4">
+<a class="text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white text-sm font-medium transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white text-sm font-medium transition-colors" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white text-sm font-medium transition-colors" href="#">Support</a>
+<a class="text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white text-sm font-medium transition-colors" href="#">Documentation</a>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-primary/5 gap-4">
+<p class="text-slate-400 text-sm">© 2024 PulseLine Systems Inc. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</div>
+<!-- Active Session Modal (Mock) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden" id="session-modal">
+<div class="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl border border-primary/10">
+<div class="flex flex-col items-center text-center gap-6">
+<div class="size-16 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-primary dark:text-blue-400">
+<span class="material-symbols-outlined text-4xl">account_circle</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">Active Session Detected</h3>
+<p class="text-slate-600 dark:text-slate-400">We found an active session for <b>dr.smith@clinic.com</b>. Would you like to go to your dashboard?</p>
+</div>
+<div class="flex w-full gap-3">
+<button class="flex-1 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+                        Go to Dashboard
+                    </button>
+<button class="flex-1 py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-bold hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors" onclick="document.getElementById('session-modal').classList.add('hidden')">
+                        Switch Account
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Logic to show modal for demo purposes -->
+<!-- In real app, this would be triggered by backend session detection -->
+<!-- <script>
+        setTimeout(() => {
+            document.getElementById('session-modal').classList.remove('hidden');
+        }, 1500);
+    </script> -->
+</body></html>

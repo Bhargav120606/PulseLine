@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Layout, Spin } from 'antd';
+import { Spin } from 'antd';
 import Navbar from '@/components/Navbar';
 import AdminSidebar from '@/components/AdminSidebar';
-
-const { Content } = Layout;
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const [authorized, setAuthorized] = useState(false);
@@ -31,14 +29,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     if (!authorized) return null;
 
     return (
-        <Layout style={{ minHeight: '100vh', background: '#001529' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f6f6f8' }}>
             <Navbar />
-            <Layout style={{ background: 'transparent' }}>
+            <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
                 <AdminSidebar />
-                <Content className="dashboard-container" style={{ minHeight: 'calc(100vh - 80px)', background: '#f0f2f5', margin: '0 24px 24px 0', borderRadius: 16, padding: 24 }}>
+                <main style={{
+                    flex: 1,
+                    overflowY: 'auto',
+                    padding: 32,
+                    background: '#f6f6f8',
+                }}>
                     {children}
-                </Content>
-            </Layout>
-        </Layout>
+                </main>
+            </div>
+        </div>
     );
 }

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PulseLine Clinic - Live Queue Status</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1f346b",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#13161f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between px-8 py-6 bg-white dark:bg-slate-900 border-b border-primary/10 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center">
+<span class="material-symbols-outlined text-4xl">medical_services</span>
+</div>
+<div>
+<h1 class="text-2xl font-extrabold tracking-tight text-primary uppercase">PulseLine Clinic</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Live Queue Dashboard</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-end">
+<span class="text-3xl font-bold text-primary">10:45 AM</span>
+<span class="text-xs font-semibold text-slate-400 tracking-widest uppercase">October 24, 2023</span>
+</div>
+<div class="bg-primary/10 p-3 rounded-lg">
+<span class="material-symbols-outlined text-primary text-3xl">schedule</span>
+</div>
+</div>
+</header>
+<main class="flex-1 p-8 max-w-[1400px] mx-auto w-full grid grid-cols-12 gap-8">
+<!-- Left Section: Currently Serving -->
+<div class="col-span-12 lg:col-span-7 flex flex-col gap-8">
+<div class="bg-primary rounded-xl p-10 text-white shadow-2xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span class="material-symbols-outlined text-[120px]">notifications_active</span>
+</div>
+<div class="relative z-10">
+<div class="inline-flex items-center gap-2 bg-white/20 px-4 py-1.5 rounded-full mb-6">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+</span>
+<span class="text-sm font-bold tracking-widest uppercase">Now Serving</span>
+</div>
+<div class="flex flex-col gap-2">
+<h2 class="text-9xl font-black tracking-tighter mb-4">A-104</h2>
+<div class="flex items-center gap-4 border-t border-white/20 pt-6 mt-4">
+<div class="size-16 rounded-full overflow-hidden bg-white/10 flex items-center justify-center border-2 border-white/30">
+<span class="material-symbols-outlined text-3xl">stethoscope</span>
+</div>
+<div>
+<p class="text-xl font-medium opacity-80">Proceed to Cabin 02</p>
+<p class="text-3xl font-bold">Dr. Sarah Smith</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Next in Line Secondary Card -->
+<div class="bg-white dark:bg-slate-900 border-2 border-primary/20 rounded-xl p-8 shadow-lg flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-slate-500 dark:text-slate-400 text-sm font-bold tracking-widest uppercase mb-2">Next in Line</span>
+<h3 class="text-6xl font-black text-primary">A-105</h3>
+</div>
+<div class="text-right">
+<div class="flex items-center justify-end gap-2 text-primary mb-1">
+<span class="material-symbols-outlined">hourglass_top</span>
+<span class="text-xl font-bold">~ 5 mins</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 font-medium">Please be ready at the lobby</p>
+</div>
+</div>
+</div>
+<!-- Right Section: Upcoming Tokens List -->
+<div class="col-span-12 lg:col-span-5 flex flex-col gap-4">
+<div class="flex items-center justify-between mb-2">
+<h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">format_list_numbered</span>
+                    Upcoming Tokens
+                </h2>
+<span class="bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-3 py-1 rounded text-sm font-bold">8 Waiting</span>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 space-y-4 max-h-[600px] custom-scrollbar">
+<!-- Token Item 1 -->
+<div class="bg-white dark:bg-slate-900 p-5 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-6">
+<span class="text-3xl font-bold text-slate-800 dark:text-slate-100">A-106</span>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800"></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-slate-400 uppercase">Estimated Wait</span>
+<span class="text-slate-700 dark:text-slate-300 font-semibold">12 mins</span>
+</div>
+</div>
+<div class="text-primary/40">
+<span class="material-symbols-outlined">arrow_forward_ios</span>
+</div>
+</div>
+<!-- Token Item 2 -->
+<div class="bg-white dark:bg-slate-900 p-5 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-6">
+<span class="text-3xl font-bold text-slate-800 dark:text-slate-100">A-107</span>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800"></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-slate-400 uppercase">Estimated Wait</span>
+<span class="text-slate-700 dark:text-slate-300 font-semibold">20 mins</span>
+</div>
+</div>
+<div class="text-primary/40">
+<span class="material-symbols-outlined">arrow_forward_ios</span>
+</div>
+</div>
+<!-- Token Item 3 -->
+<div class="bg-white dark:bg-slate-900 p-5 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-6">
+<span class="text-3xl font-bold text-slate-800 dark:text-slate-100">B-022</span>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800"></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-slate-400 uppercase">Estimated Wait</span>
+<span class="text-slate-700 dark:text-slate-300 font-semibold">35 mins</span>
+</div>
+</div>
+<div class="text-primary/40">
+<span class="material-symbols-outlined">arrow_forward_ios</span>
+</div>
+</div>
+<!-- Token Item 4 -->
+<div class="bg-white dark:bg-slate-900 p-5 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-6">
+<span class="text-3xl font-bold text-slate-800 dark:text-slate-100">A-108</span>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800"></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-slate-400 uppercase">Estimated Wait</span>
+<span class="text-slate-700 dark:text-slate-300 font-semibold">45 mins</span>
+</div>
+</div>
+<div class="text-primary/40">
+<span class="material-symbols-outlined">arrow_forward_ios</span>
+</div>
+</div>
+<!-- Token Item 5 -->
+<div class="bg-white dark:bg-slate-900 p-5 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between opacity-60">
+<div class="flex items-center gap-6">
+<span class="text-3xl font-bold text-slate-800 dark:text-slate-100">A-109</span>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800"></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-slate-400 uppercase">Estimated Wait</span>
+<span class="text-slate-700 dark:text-slate-300 font-semibold">55 mins</span>
+</div>
+</div>
+<div class="text-primary/40">
+<span class="material-symbols-outlined">arrow_forward_ios</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer with Clinic Info -->
+<footer class="mt-auto bg-slate-900 text-white p-6 border-t border-white/10">
+<div class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary/80">store</span>
+<span class="text-sm font-semibold uppercase tracking-wider text-slate-400">Clinic Hours:</span>
+<span class="text-sm font-bold">08:00 AM - 08:00 PM</span>
+</div>
+<div class="hidden md:block h-4 w-px bg-slate-700"></div>
+<div class="flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-primary/80">call</span>
+<span class="font-bold">+1 (555) 123-4567</span>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-primary/20 px-6 py-2 rounded-full border border-primary/30">
+<p class="text-xs text-slate-300 font-medium">Emergency? Dial 911 or visit the front desk immediately.</p>
+<span class="material-symbols-outlined text-red-400 animate-pulse">emergency</span>
+</div>
+</div>
+</footer>
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(31, 52, 107, 0.05);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(31, 52, 107, 0.2);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(31, 52, 107, 0.4);
+        }
+    </style>
+</body></html>

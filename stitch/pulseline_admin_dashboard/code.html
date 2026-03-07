@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PulseLine Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1f346b",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#13161f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .sidebar-item-active { background-color: rgba(31, 52, 107, 0.1); color: #1f346b; border-right: 3px solid #1f346b; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex-shrink-0 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="p-6 flex flex-col gap-1">
+<div class="flex items-center gap-2 text-primary dark:text-blue-400">
+<span class="material-symbols-outlined text-3xl font-bold">pulse_alert</span>
+<h1 class="text-xl font-bold tracking-tight">PulseLine</h1>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">Clinic Control Center</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="sidebar-item-active flex items-center gap-3 px-4 py-3 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-medium">Doctors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-medium">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 px-2">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary overflow-hidden">
+<img alt="Admin Avatar" data-alt="Cartoon avatar of a professional clinic administrator" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrFIemPLpKQikf-uSlNqGs8hbChq9L891pzBjXVcchAJZlB0YwlhKLYLRMFpgXoGORJPc5dBhOpmggmitt0TT6Uz7shn6wUMVAmCmNZvi-EaW3f922ic1ORXXh74pBLZq6m2u1mYG7EAPdvoMDWEC9UyBztsbTe7ytQq5CUV8IuVDCZpMOyLaN0vt_0MGAuSFmgOYGDblp1_NFvWaU8hnj_0FqhoZjN2swSiFeab2diznUXGGyhEgw-mlHbKq-oi3VMO0IgwWqzozS"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Dr. Sarah Smith</p>
+<p class="text-xs text-slate-500 truncate">Senior Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 z-10">
+<div class="flex items-center gap-4">
+<h2 class="text-lg font-bold">Admin Dashboard</h2>
+<div class="flex items-center gap-2 px-3 py-1 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-full text-xs font-medium">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+</span>
+                        Live System
+                    </div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search patients or tokens..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-8 space-y-8">
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<span class="text-green-500 text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> 12%
+                            </span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Patients Today</p>
+<h3 class="text-3xl font-bold mt-1">128</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-100 rounded-lg text-blue-700">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<span class="text-red-500 text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> 5%
+                            </span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Average Wait Time</p>
+<h3 class="text-3xl font-bold mt-1">14 <span class="text-lg font-normal text-slate-400">mins</span></h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-amber-100 rounded-lg text-amber-700">
+<span class="material-symbols-outlined">hourglass_empty</span>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">In Queue</p>
+<h3 class="text-3xl font-bold mt-1">24</h3>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-green-100 rounded-lg text-green-700">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Completed Appointments</p>
+<h3 class="text-3xl font-bold mt-1">104</h3>
+</div>
+</div>
+<!-- Main Section: Queue Management -->
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h3 class="text-xl font-bold">Real-time Queue Management</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-slate-500 dark:text-slate-400 text-sm">Last updated: 5s ago</span>
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+<span class="text-primary dark:text-blue-400 text-sm font-medium">Auto-polling active</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary/90 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                                New Patient
+                            </button>
+<button class="p-2 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-xs font-bold tracking-wider">
+<th class="px-6 py-4">Token</th>
+<th class="px-6 py-4">Patient</th>
+<th class="px-6 py-4">Doctor</th>
+<th class="px-6 py-4">Wait Time</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-mono font-bold text-primary dark:text-blue-400">#TK-402</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-bold">JD</div>
+<span class="font-medium">Jane Doe</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-400">Dr. Aris Thorne</td>
+<td class="px-6 py-4 text-slate-500 text-sm">12 mins</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 rounded-full text-xs font-bold uppercase">Waiting</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-bold hover:bg-primary/90 transition-all">Call Next</button>
+<button class="px-3 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800">Skip</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-primary/5 dark:bg-primary/10">
+<td class="px-6 py-4 font-mono font-bold text-primary dark:text-blue-400">#TK-398</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-bold">MS</div>
+<span class="font-medium">Mark Spencer</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-400">Dr. Sarah Smith</td>
+<td class="px-6 py-4 text-slate-500 text-sm">In Service</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 rounded-full text-xs font-bold uppercase">In-Progress</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="px-3 py-1.5 bg-green-600 text-white rounded-lg text-xs font-bold hover:bg-green-700">Complete</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-mono font-bold text-primary dark:text-blue-400">#TK-405</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-bold">RL</div>
+<span class="font-medium">Robert Lewin</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-400">Dr. Aris Thorne</td>
+<td class="px-6 py-4 text-slate-500 text-sm">25 mins</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 rounded-full text-xs font-bold uppercase">Waiting</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-bold hover:bg-primary/90 transition-all">Call Next</button>
+<button class="px-3 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800">Skip</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="opacity-60 grayscale-[0.5]">
+<td class="px-6 py-4 font-mono font-bold text-slate-400">#TK-395</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400">AW</div>
+<span class="font-medium text-slate-400 line-through">Alice Wong</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-400">Dr. Emily Blunt</td>
+<td class="px-6 py-4 text-slate-400 text-sm">Done</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-green-50 text-green-600 dark:bg-green-900/10 dark:text-green-500 rounded-full text-xs font-bold uppercase">Completed</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<p class="text-sm text-slate-500">Showing 4 of 24 patients in queue</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-slate-200 dark:border-slate-700 rounded text-sm hover:bg-slate-50">Previous</button>
+<button class="px-3 py-1 border border-slate-200 dark:border-slate-700 rounded text-sm hover:bg-slate-50">Next</button>
+</div>
+</div>
+</section>
+<!-- Grid and Tables for Doctors Status -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800">
+<h3 class="text-lg font-bold">Doctor Availability</h3>
+</div>
+<div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg flex items-center justify-between border border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">medical_services</span>
+</div>
+<div>
+<p class="font-bold text-sm">Dr. Aris Thorne</p>
+<p class="text-xs text-slate-500">General Physician</p>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-bold uppercase">Available</span>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg flex items-center justify-between border border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">stethoscope</span>
+</div>
+<div>
+<p class="font-bold text-sm">Dr. Sarah Smith</p>
+<p class="text-xs text-slate-500">Cardiologist</p>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-[10px] font-bold uppercase">Busy</span>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg flex items-center justify-between border border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">psychiatry</span>
+</div>
+<div>
+<p class="font-bold text-sm">Dr. Emily Blunt</p>
+<p class="text-xs text-slate-500">Neurologist</p>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-slate-200 text-slate-600 rounded text-[10px] font-bold uppercase">Away</span>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg flex items-center justify-between border border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">dentistry</span>
+</div>
+<div>
+<p class="font-bold text-sm">Dr. James Wilson</p>
+<p class="text-xs text-slate-500">Dentist</p>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-bold uppercase">Available</span>
+</div>
+</div>
+</div>
+<div class="bg-primary text-white rounded-xl shadow-lg p-6 flex flex-col justify-between relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="text-lg font-bold mb-2">System Health</h3>
+<p class="text-primary-100 text-sm opacity-80">All services are operational. Latency at 12ms.</p>
+<div class="mt-8 space-y-4">
+<div class="flex justify-between items-end">
+<span class="text-xs font-medium uppercase tracking-wider">Storage Capacity</span>
+<span class="text-xs font-bold">78%</span>
+</div>
+<div class="w-full bg-white/20 h-1.5 rounded-full">
+<div class="bg-white h-full rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<div class="mt-8 flex items-center gap-4">
+<div class="flex -space-x-2">
+<div class="size-8 rounded-full border-2 border-primary bg-slate-300 overflow-hidden">
+<img alt="Team 1" data-alt="Team member avatar small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9ASVXCsGLMvbr9RUhFIC1NpqIwf53CjleLlwx23NwbxEhzPoAzMeIi7l3YzoNL3GJ-3FKXQvOQyMxE0RoYTlcPmquXjaPfEBvf1xa__7OEvSFjPoMMl01SRAbRMSBMd5aQv82gFpyqklYBH7_QHk_D_0LPVvREQKOLPfqwMNxRPOaQn7jVteGuoSCyv5U-ot5IKFtMauaX11AzTCWryGXNj38ocDuiQ7GLdnv1kTb8nC28ZdBNgkKRYysTzFED7dXxJqJIpUFBJUr"/>
+</div>
+<div class="size-8 rounded-full border-2 border-primary bg-slate-300 overflow-hidden">
+<img alt="Team 2" data-alt="Team member avatar small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn2UOWFQHL051U6eAIMVay_uXR3iyxuG-CqWkuso5Sm54F75X1O7lsysjZGrXH9bqeshbp62Z5j9Wd7HD8bd87-o3PL50kQ1juNB8chX2Jde-YhmLB8VDUp62PuA8oMafxQaf8JePV2PL3-rbG002KJ1sOkaFyqemxxcUQ_BZOlX7ZfCH_SS3eTxL19mNcdiduVt2Ihie3hTLGrX-rjSplDLl5HVODtcyAzc2u-gHn0kTYxi0xZiGQi4E2iboHdOpQVB9VnHu0aMiZ"/>
+</div>
+<div class="size-8 rounded-full border-2 border-primary bg-slate-300 overflow-hidden">
+<img alt="Team 3" data-alt="Team member avatar small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACGVvJWd4HIvSKUqmjjrAnlvjQfIoOoOp-U06pjAUo1xJkhJJNdhsGrnhQhiMS6nWh-KTuVJfSOIfnuybFdOC9-_JShSFo0NWKRPMU5g5kqmeMcg3kAtGrjeXmyEjYbBtJj5H-K2vNMjIiIlLc9friEt15K0RF3CDpV0XslLeu7O3j_WjyVjukJaCe0ShP3iEX3DVvD0l4J6v4zleQ1ED2792QFjD-CBDSDg7-Kf8pSZICW3wsjokSf5gkGAVXeows7N60jCuDr7gI"/>
+</div>
+</div>
+<span class="text-xs font-medium">3 Active Admins</span>
+</div>
+</div>
+<div class="absolute -bottom-6 -right-6 text-white/5">
+<span class="material-symbols-outlined text-[160px]">shield_with_heart</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

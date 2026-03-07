@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect, useState, useCallback } from 'react';
-import { Typography, Table, Button, Space, Tag, App, Spin } from 'antd';
-import { PlayCircleOutlined, ForwardOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { Table, Button, Space, Tag, App, Spin } from 'antd';
 import DashboardStats from '@/components/DashboardStats';
-
-const { Title } = Typography;
 
 export default function AdminDashboard() {
     const [queueData, setQueueData] = useState<any>(null);
@@ -34,7 +31,6 @@ export default function AdminDashboard() {
 
     const handleAction = async (id: string, status: string) => {
         try {
-            // If starting a new consultation, first move any in-progress to completed
             if (status === 'in-progress' && queueData?.currentAppointment) {
                 await fetch(`/api/appointments/${queueData.currentAppointment._id}`, {
                     method: 'PUT',
@@ -57,14 +53,27 @@ export default function AdminDashboard() {
         }
     };
 
-    if (loading) return <Spin size="large" />;
+    if (loading) return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 400 }}><Spin size="large" /></div>;
 
     const columns = [
         {
             title: 'Token',
             dataIndex: 'tokenNumber',
             key: 'tokenNumber',
-            render: (t: number) => <Tag color="blue">#{t}</Tag>,
+            render: (t: number) => (
+                <span style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    padding: '2px 10px',
+                    borderRadius: 4,
+                    background: 'rgba(38, 198, 218, 0.1)',
+                    color: '#26c6da',
+                    fontSize: 14,
+                    fontWeight: 700,
+                }}>
+                    #{t}
+                </span>
+            ),
         },
         {
             title: 'Patient',
@@ -100,19 +109,23 @@ export default function AdminDashboard() {
                             <Button
                                 type="primary"
                                 size="small"
-                                style={{ background: '#00bcd4', borderColor: '#00bcd4' }}
-                                icon={<PlayCircleOutlined />}
+                                style={{ background: '#26c6da', borderColor: '#26c6da' }}
                                 onClick={() => handleAction(record._id, 'in-progress')}
                             >
-                                Call In
+                                <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>play_circle</span>
+                                    Call In
+                                </span>
                             </Button>
                             <Button
                                 danger
                                 size="small"
-                                icon={<ForwardOutlined />}
                                 onClick={() => handleAction(record._id, 'skipped')}
                             >
-                                Skip
+                                <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>fast_forward</span>
+                                    Skip
+                                </span>
                             </Button>
                         </>
                     )}
@@ -120,11 +133,13 @@ export default function AdminDashboard() {
                         <Button
                             type="primary"
                             size="small"
-                            style={{ background: '#52c41a', borderColor: '#52c41a' }}
-                            icon={<CheckCircleOutlined />}
+                            style={{ background: '#22c55e', borderColor: '#22c55e' }}
                             onClick={() => handleAction(record._id, 'completed')}
                         >
-                            Complete
+                            <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>check_circle</span>
+                                Complete
+                            </span>
                         </Button>
                     )}
                 </Space>
@@ -140,7 +155,11 @@ export default function AdminDashboard() {
 
     return (
         <div>
-            <Title level={3}>Admin Dashboard</Title>
+            {/* Header */}
+            <div style={{ marginBottom: 32 }}>
+                <h1 style={{ fontSize: 28, fontWeight: 900, color: '#0f172a', margin: '0 0 4px', letterSpacing: '-0.02em' }}>Admin Dashboard</h1>
+                <p style={{ color: '#64748b', fontSize: 15, margin: 0, fontWeight: 500 }}>Manage and optimize your clinic operations</p>
+            </div>
 
             <DashboardStats
                 totalToday={queueData?.totalToday || 0}
@@ -149,15 +168,23 @@ export default function AdminDashboard() {
                 averageWaitTime={15}
             />
 
-            <div style={{ marginTop: 24 }}>
-                <Title level={5}>Today&apos;s Queue</Title>
+            <div style={{
+                marginTop: 24,
+                background: '#ffffff',
+                borderRadius: 12,
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                overflow: 'hidden',
+            }}>
+                <div style={{ padding: '16px 24px', borderBottom: '1px solid #f1f5f9' }}>
+                    <h3 style={{ fontSize: 16, fontWeight: 700, margin: 0, color: '#0f172a' }}>Today&apos;s Queue</h3>
+                </div>
                 <Table
                     dataSource={allAppointments}
                     columns={columns}
                     rowKey="_id"
                     pagination={false}
-                    bordered
-                    style={{ borderRadius: 8, overflow: 'hidden' }}
+                    style={{ borderRadius: 0 }}
                 />
             </div>
         </div>

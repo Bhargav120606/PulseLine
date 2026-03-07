@@ -1,17 +1,13 @@
 "use client";
 
-import { Layout, Menu, ConfigProvider } from 'antd';
-import {
-    DashboardOutlined,
-    TeamOutlined,
-    MedicineBoxOutlined,
-    BarChartOutlined,
-    LogoutOutlined,
-} from '@ant-design/icons';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-const { Sider } = Layout;
+const menuItems = [
+    { key: '/admin', icon: 'grid_view', label: 'Dashboard' },
+    { key: '/admin/doctors', icon: 'medical_services', label: 'Doctors' },
+    { key: '/admin/reports', icon: 'bar_chart', label: 'Reports' },
+];
 
 export default function AdminSidebar() {
     const pathname = usePathname();
@@ -23,57 +19,90 @@ export default function AdminSidebar() {
         router.refresh();
     };
 
-    const menuItems = [
-        {
-            key: '/admin',
-            icon: <DashboardOutlined />,
-            label: <Link href="/admin">Dashboard</Link>,
-        },
-        {
-            key: '/admin/doctors',
-            icon: <MedicineBoxOutlined />,
-            label: <Link href="/admin/doctors">Doctors</Link>,
-        },
-        {
-            key: '/admin/reports',
-            icon: <BarChartOutlined />,
-            label: <Link href="/admin/reports">Reports</Link>,
-        },
-        {
-            key: 'logout',
-            icon: <LogoutOutlined />,
-            label: 'Logout',
-            onClick: handleLogout,
-            danger: true,
-        },
-    ];
-
     return (
-        <Sider
-            breakpoint="lg"
-            collapsedWidth="80"
-            style={{ minHeight: 'calc(100vh - 64px)', background: '#001529', borderRight: '1px solid #001529' }}
-        >
-            <ConfigProvider
-                theme={{
-                    components: {
-                        Menu: {
-                            itemSelectedBg: '#00bcd4',
-                            itemSelectedColor: '#ffffff',
-                            itemColor: 'rgba(255, 255, 255, 0.65)',
-                            itemHoverColor: '#ffffff',
-                            itemHoverBg: 'rgba(255,255,255,0.08)'
-                        },
-                    },
-                }}
-            >
-                <Menu
-                    mode="inline"
-                    selectedKeys={[pathname]}
-                    style={{ borderRight: 0, paddingTop: 16, background: 'transparent' }}
-                    items={menuItems}
-                />
-            </ConfigProvider>
-        </Sider>
+        <aside style={{
+            width: 256,
+            borderRight: '1px solid #e2e8f0',
+            background: '#ffffff',
+            display: 'flex',
+            flexDirection: 'column',
+            flexShrink: 0,
+        }}>
+            {/* Header */}
+            <div style={{ padding: 24 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <div style={{
+                        background: '#26c6da',
+                        borderRadius: 8,
+                        padding: 6,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                        <span className="material-symbols-outlined" style={{ color: '#ffffff', fontSize: 20 }}>monitoring</span>
+                    </div>
+                    <div>
+                        <h1 style={{ fontSize: 18, fontWeight: 700, color: '#26c6da', margin: 0, lineHeight: 1.2 }}>PulseLine</h1>
+                        <p style={{ fontSize: 12, color: '#94a3b8', fontWeight: 500, margin: 0 }}>Admin Panel</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Navigation */}
+            <nav style={{ flex: 1, padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+                {menuItems.map((item) => {
+                    const isActive = pathname === item.key;
+                    return (
+                        <Link
+                            key={item.key}
+                            href={item.key}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 12,
+                                padding: '10px 12px',
+                                borderRadius: 8,
+                                background: isActive ? 'rgba(38, 198, 218, 0.1)' : 'transparent',
+                                color: isActive ? '#26c6da' : '#64748b',
+                                fontWeight: isActive ? 700 : 600,
+                                fontSize: 14,
+                                textDecoration: 'none',
+                                transition: 'all 0.2s',
+                            }}
+                        >
+                            <span className="material-symbols-outlined" style={{ fontSize: 20 }}>{item.icon}</span>
+                            {item.label}
+                        </Link>
+                    );
+                })}
+            </nav>
+
+            {/* Logout */}
+            <div style={{ padding: 16, marginTop: 'auto' }}>
+                <button
+                    onClick={handleLogout}
+                    style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 8,
+                        padding: '10px 16px',
+                        borderRadius: 8,
+                        background: '#ffffff',
+                        border: '1px solid #fecaca',
+                        color: '#ef4444',
+                        fontWeight: 700,
+                        fontSize: 14,
+                        cursor: 'pointer',
+                        fontFamily: 'inherit',
+                        transition: 'background 0.2s',
+                    }}
+                >
+                    <span className="material-symbols-outlined" style={{ fontSize: 18 }}>logout</span>
+                    Logout
+                </button>
+            </div>
+        </aside>
     );
 }
