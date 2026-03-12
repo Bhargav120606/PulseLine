@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import connectToDatabase from '@/lib/mongodb';
 import Appointment from '@/models/Appointment';
 import { decrypt } from '@/lib/auth';
+import { logAction, getClientIp } from '@/utils/auditLogger';
 
 // Book a new appointment
 export async function POST(req: Request) {
@@ -43,6 +44,16 @@ export async function POST(req: Request) {
             tokenNumber,
             status: 'waiting',
             estimatedWaitTime,
+        });
+
+        // Audit log: record appointment creation
+        logAction({
+            userId: payload.userId as string,
+            action: 'CREATE',
+            resource: 'appointment',
+            details: { appointmentId: appointment._id.toString(), doctorId, tokenNumber },
+            ipAddress: getClientIp(req.headers),
+            userAgent: req.headers.get('user-agent') ?? '',
         });
 
         return NextResponse.json({ message: 'Appointment booked', appointment }, { status: 201 });

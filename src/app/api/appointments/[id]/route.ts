@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import connectToDatabase from '@/lib/mongodb';
 import Appointment from '@/models/Appointment';
 import { decrypt } from '@/lib/auth';
+import { logAction, getClientIp } from '@/utils/auditLogger';
 
 export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
@@ -24,6 +25,16 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
         if (!updated) {
             return NextResponse.json({ message: 'Appointment not found' }, { status: 404 });
         }
+
+        // Audit log: record appointment update
+        logAction({
+            userId: payload.userId as string,
+            action: 'UPDATE',
+            resource: 'appointment',
+            details: { appointmentId: id, updatedFields: Object.keys(body) },
+            ipAddress: getClientIp(req.headers),
+            userAgent: req.headers.get('user-agent') ?? '',
+        });
 
         return NextResponse.json({ message: 'Appointment updated', appointment: updated }, { status: 200 });
     } catch (error: any) {

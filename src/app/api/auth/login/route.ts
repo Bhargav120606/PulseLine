@@ -4,6 +4,7 @@ import connectToDatabase from '@/lib/mongodb';
 import User from '@/models/User';
 import bcrypt from 'bcryptjs';
 import { encrypt } from '@/lib/auth';
+import { logAction, getClientIp } from '@/utils/auditLogger';
 
 export async function POST(req: Request) {
     try {
@@ -45,6 +46,16 @@ export async function POST(req: Request) {
             path: '/',
             secure: process.env.NODE_ENV === 'production',
             maxAge: 60 * 60 * 24, // 24 hours
+        });
+
+        // Audit log: record successful login
+        logAction({
+            userId: user._id.toString(),
+            action: 'LOGIN',
+            resource: 'auth',
+            details: { email: user.email },
+            ipAddress: getClientIp(req.headers),
+            userAgent: req.headers.get('user-agent') ?? '',
         });
 
         return NextResponse.json({ message: 'Logged in successfully', user: payload }, { status: 200 });
