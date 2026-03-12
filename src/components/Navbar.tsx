@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Space, Typography, Dropdown, Badge, notification } from 'antd';
+import { Button, Space, Typography, Dropdown, Badge, App } from 'antd';
 import { UserOutlined, LogoutOutlined, DashboardOutlined, BellOutlined, CalendarOutlined, LineChartOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
@@ -14,6 +14,7 @@ export default function Navbar() {
     const [user, setUser] = useState<any>(null);
     const [notifications, setNotifications] = useState<{ id: string, message: string, time: string, read: boolean }[]>([]);
     const [notifiedTokens, setNotifiedTokens] = useState<Set<string>>(new Set());
+    const { notification } = App.useApp();
 
     useEffect(() => {
         fetch('/api/user/me')
@@ -49,7 +50,7 @@ export default function Navbar() {
                     if (!notifiedTokens.has(notifyId)) {
                         if (queueData.currentToken === token) {
                             notification.success({
-                                message: 'It\'s Your Turn!',
+                                title: 'It\'s Your Turn!',
                                 description: `Doctor is calling you in now! Token #${token}`,
                                 duration: 10,
                             });
@@ -57,7 +58,7 @@ export default function Navbar() {
                             setNotifiedTokens(prev => new Set(prev).add(notifyId));
                         } else if (queueData.nextTokens && queueData.nextTokens[0] === token) {
                             notification.info({
-                                message: 'You are next!',
+                                title: 'You are next!',
                                 description: `Please get ready. Token #${token} is next in line.`,
                                 duration: 10,
                             });
