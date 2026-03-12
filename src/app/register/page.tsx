@@ -100,7 +100,11 @@ export default function RegisterPage() {
                         </div>
 
                         <Form layout="vertical" onFinish={handleRegister} size="large">
-                            <Form.Item name="name" label={<span style={{ fontSize: 14, fontWeight: 600, color: '#334155' }}>Full Name</span>} rules={[{ required: true, message: 'Enter your name' }]}>
+                            <Form.Item name="name" label={<span style={{ fontSize: 14, fontWeight: 600, color: '#334155' }}>Full Name</span>} rules={[
+                                { required: true, message: 'Enter your name' },
+                                { min: 2, message: 'Name must be at least 2 characters long' },
+                                { pattern: /^[a-zA-Z\s.,-]+$/, message: 'Name can only contain letters, spaces, and basic punctuation' }
+                            ]}>
                                 <Input placeholder="Enter your full name" style={{ height: 48, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8 }} />
                             </Form.Item>
 

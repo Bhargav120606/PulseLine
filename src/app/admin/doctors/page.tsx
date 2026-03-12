@@ -177,16 +177,29 @@ export default function DoctorsPage() {
                 okText={editingDoctor ? 'Update' : 'Add'}
             >
                 <Form form={form} layout="vertical" onFinish={handleSubmit}>
-                    <Form.Item name="name" label="Doctor Name" rules={[{ required: true }]}>
+                    <Form.Item name="name" label="Doctor Name" rules={[
+                        { required: true, message: 'Please enter the doctor\'s name' },
+                        { min: 3, message: 'Name must be at least 3 characters long' },
+                        { pattern: /^[a-zA-Z\s.,-]+$/, message: 'Name can only contain letters, spaces, and basic punctuation' }
+                    ]}>
                         <Input placeholder="Dr. John Smith" />
                     </Form.Item>
-                    <Form.Item name="specialty" label="Specialty" rules={[{ required: true }]}>
+                    <Form.Item name="specialty" label="Specialty" rules={[
+                        { required: true, message: 'Please enter the doctor\'s specialty' },
+                        { min: 2, message: 'Specialty must be at least 2 characters long' }
+                    ]}>
                         <Input placeholder="Cardiology" />
                     </Form.Item>
-                    <Form.Item name="workingHoursStart" label="Start Time" initialValue="09:00">
+                    <Form.Item name="workingHoursStart" label="Start Time" initialValue="09:00" rules={[
+                        { required: true, message: 'Start time is required' },
+                        { pattern: /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, message: 'Time must be in HH:MM format (24-hour)' }
+                    ]}>
                         <Input placeholder="09:00" />
                     </Form.Item>
-                    <Form.Item name="workingHoursEnd" label="End Time" initialValue="17:00">
+                    <Form.Item name="workingHoursEnd" label="End Time" initialValue="17:00" rules={[
+                        { required: true, message: 'End time is required' },
+                        { pattern: /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, message: 'Time must be in HH:MM format (24-hour)' }
+                    ]}>
                         <Input placeholder="17:00" />
                     </Form.Item>
                     <Form.Item name="isAvailable" label="Available" valuePropName="checked" initialValue={true}>

@@ -45,15 +45,27 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
 
     return (
         <Form form={form} layout="vertical" onFinish={handleSubmit} size="large">
-            <Form.Item name="patientName" label="Patient Name" rules={[{ required: true, message: 'Enter patient name' }]}>
+            <Form.Item name="patientName" label="Patient Name" rules={[
+                { required: true, message: 'Enter patient name' },
+                { min: 2, message: 'Name must be at least 2 characters long' },
+                { pattern: /^[a-zA-Z\s.,-]+$/, message: 'Name can only contain letters, spaces, and basic punctuation' }
+            ]}>
                 <Input placeholder="Enter full name" />
             </Form.Item>
 
-            <Form.Item name="phoneNumber" label="Phone Number" rules={[{ required: true, message: 'Enter phone number' }]}>
+            <Form.Item name="phoneNumber" label="Phone Number" rules={[
+                { required: true, message: 'Enter phone number' },
+                { pattern: /^\d{10}$/, message: 'Phone number must be exactly 10 digits' }
+            ]}>
                 <Input placeholder="Enter phone number" />
             </Form.Item>
 
-            <Form.Item name="age" label="Age" rules={[{ required: true, message: 'Enter age' }]}>
+            <Form.Item name="age" label="Age" rules={[
+                { required: true, message: 'Enter age' },
+                { type: 'number', message: 'Age must be a valid number' },
+                { type: 'number', min: 1, message: 'Age must be at least 1' },
+                { type: 'number', max: 120, message: 'Age must be at most 120' }
+            ]}>
                 <InputNumber min={1} max={120} placeholder="Enter age" style={{ width: '100%' }} />
             </Form.Item>
 
