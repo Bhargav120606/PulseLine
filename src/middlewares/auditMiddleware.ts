@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { decrypt } from '@/lib/auth';
 import { logAction, getClientIp } from '@/utils/auditLogger';
+import type { AuditAction } from '@/utils/auditActions';
 
 /**
  * Higher-order function that wraps a Next.js route handler with automatic
@@ -9,13 +10,13 @@ import { logAction, getClientIp } from '@/utils/auditLogger';
  * and logs the action on success.
  *
  * Usage:
- *   export const POST = withAuditLog('CREATE', 'appointment', async (req, payload) => {
+ *   export const POST = withAuditLog(AUDIT_ACTIONS.CREATE, 'appointment', async (req, payload) => {
  *     // your route logic here
  *     return NextResponse.json({ success: true });
  *   });
  */
 export function withAuditLog(
-  action: string,
+  action: AuditAction,
   resource: string,
   handler: (
     req: Request,

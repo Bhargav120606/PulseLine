@@ -1,8 +1,9 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import { AUDIT_ACTIONS, type AuditAction } from '@/utils/auditActions';
 
 export interface IAuditLog extends Document {
   userId: mongoose.Types.ObjectId | string;
-  action: string;
+  action: AuditAction;
   resource: string;
   details: Record<string, unknown>;
   ipAddress: string;
@@ -15,8 +16,8 @@ const AuditLogSchema: Schema = new Schema(
     // Reference to the user who performed the action
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true },
 
-    // Action performed (e.g., 'LOGIN', 'CREATE', 'UPDATE', 'DELETE', 'SEND_MESSAGE')
-    action: { type: String, required: true, index: true },
+    // Action performed — validated against AUDIT_ACTIONS enum at the DB level
+    action: { type: String, enum: Object.values(AUDIT_ACTIONS), required: true, index: true },
 
     // Resource affected (e.g., 'appointment', 'user', 'doctor')
     resource: { type: String, required: true, index: true },
@@ -31,7 +32,7 @@ const AuditLogSchema: Schema = new Schema(
     userAgent: { type: String, default: '' },
 
     // Timestamp of the action
-    timestamp: { type: Date, default: Date.now, index: true },
+    timestamp: {type: Date,default: Date.now,index: { expires: "90d" }}
   },
   {
     // Disable updatedAt/createdAt since we have our own timestamp

@@ -5,6 +5,7 @@ import User from '@/models/User';
 import bcrypt from 'bcryptjs';
 import { encrypt } from '@/lib/auth';
 import { logAction, getClientIp } from '@/utils/auditLogger';
+import { AUDIT_ACTIONS } from '@/utils/auditActions';
 
 export async function POST(req: Request) {
     try {
@@ -51,7 +52,7 @@ export async function POST(req: Request) {
         // Audit log: record successful login
         logAction({
             userId: user._id.toString(),
-            action: 'LOGIN',
+            action: AUDIT_ACTIONS.LOGIN,
             resource: 'auth',
             details: { email: user.email },
             ipAddress: getClientIp(req.headers),

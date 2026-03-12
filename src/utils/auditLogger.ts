@@ -1,9 +1,10 @@
 import connectToDatabase from '@/lib/mongodb';
 import AuditLog from '@/models/AuditLog';
+import type { AuditAction } from '@/utils/auditActions';
 
 export interface AuditLogEntry {
   userId: string;
-  action: string;
+  action: AuditAction;
   resource: string;
   details?: Record<string, unknown>;
   ipAddress?: string;
@@ -52,7 +53,7 @@ export function getClientIp(headers: Headers): string {
 export function buildAuditEntry(
   req: Request,
   payload: { userId: string },
-  action: string,
+  action: AuditAction,
   resource: string,
   details: Record<string, unknown> = {}
 ): AuditLogEntry {

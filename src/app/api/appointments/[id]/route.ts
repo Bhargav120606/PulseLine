@@ -4,6 +4,7 @@ import connectToDatabase from '@/lib/mongodb';
 import Appointment from '@/models/Appointment';
 import { decrypt } from '@/lib/auth';
 import { logAction, getClientIp } from '@/utils/auditLogger';
+import { AUDIT_ACTIONS } from '@/utils/auditActions';
 
 export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
@@ -29,7 +30,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
         // Audit log: record appointment update
         logAction({
             userId: payload.userId as string,
-            action: 'UPDATE',
+            action: AUDIT_ACTIONS.UPDATE,
             resource: 'appointment',
             details: { appointmentId: id, updatedFields: Object.keys(body) },
             ipAddress: getClientIp(req.headers),
