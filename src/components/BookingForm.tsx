@@ -1,6 +1,6 @@
 "use client";
 
-import { Form, Input, Select, Button, InputNumber, App } from 'antd';
+import { Form, Input, Select, Button, InputNumber, Tag, App } from 'antd';
 import { useEffect, useState } from 'react';
 
 interface BookingFormProps {
@@ -71,9 +71,17 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
 
             <Form.Item name="doctorId" label="Select Doctor" rules={[{ required: true, message: 'Select a doctor' }]}>
                 <Select placeholder="Choose a doctor">
-                    {doctors.filter((d) => d.isAvailable).map((doc) => (
-                        <Select.Option key={doc._id} value={doc._id}>
-                            {doc.name} — {doc.specialty}
+                    {doctors.map((doc) => (
+                        <Select.Option key={doc._id} value={doc._id} disabled={!doc.isAvailable}>
+                            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <span>{doc.name} — {doc.specialty}</span>
+                                <Tag
+                                    color={doc.isAvailable ? 'success' : 'error'}
+                                    style={{ marginLeft: 8, marginRight: 0, fontSize: 11, lineHeight: '18px' }}
+                                >
+                                    {doc.isAvailable ? 'Available' : 'Not Available'}
+                                </Tag>
+                            </span>
                         </Select.Option>
                     ))}
                 </Select>
