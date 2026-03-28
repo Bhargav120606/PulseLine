@@ -160,7 +160,7 @@ export default function Home() {
                   justifyContent: 'center',
                 }}>
                   <Image
-                    src="/reception2.jpg"
+                    src="/modern_reception_desk.png"
                     alt="PulseLine Reception"
                     fill
                     style={{ objectFit: 'cover' }}
